@@ -1,0 +1,3 @@
+/mnt/c/Users/semeg/CLionProjects/frequent directions/cmake-build-debug/CMakeFiles/frequent_directions.dir
+/mnt/c/Users/semeg/CLionProjects/frequent directions/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/semeg/CLionProjects/frequent directions/cmake-build-debug/CMakeFiles/rebuild_cache.dir
