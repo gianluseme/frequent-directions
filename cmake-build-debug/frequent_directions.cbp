@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/c/Users/semeg/CLionProjects/frequent directions/frequentdirections.cpp">
+			<Option target="frequent_directions"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/semeg/CLionProjects/frequent directions/frequentdirections.h">
+			<Option target="frequent_directions"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/semeg/CLionProjects/frequent directions/main.cpp">
 			<Option target="frequent_directions"/>
 		</Unit>

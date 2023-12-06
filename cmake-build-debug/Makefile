@@ -129,6 +129,30 @@ frequent_directions/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/frequent_directions.dir/build.make CMakeFiles/frequent_directions.dir/build
 .PHONY : frequent_directions/fast
 
+frequentdirections.o: frequentdirections.cpp.o
+.PHONY : frequentdirections.o
+
+# target to build an object file
+frequentdirections.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/frequent_directions.dir/build.make CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o
+.PHONY : frequentdirections.cpp.o
+
+frequentdirections.i: frequentdirections.cpp.i
+.PHONY : frequentdirections.i
+
+# target to preprocess a source file
+frequentdirections.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/frequent_directions.dir/build.make CMakeFiles/frequent_directions.dir/frequentdirections.cpp.i
+.PHONY : frequentdirections.cpp.i
+
+frequentdirections.s: frequentdirections.cpp.s
+.PHONY : frequentdirections.s
+
+# target to generate assembly for a file
+frequentdirections.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/frequent_directions.dir/build.make CMakeFiles/frequent_directions.dir/frequentdirections.cpp.s
+.PHONY : frequentdirections.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... frequent_directions"
+	@echo "... frequentdirections.o"
+	@echo "... frequentdirections.i"
+	@echo "... frequentdirections.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

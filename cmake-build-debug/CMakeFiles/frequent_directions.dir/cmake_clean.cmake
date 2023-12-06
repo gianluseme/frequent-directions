@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o"
+  "CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o.d"
   "CMakeFiles/frequent_directions.dir/main.cpp.o"
   "CMakeFiles/frequent_directions.dir/main.cpp.o.d"
   "CMakeFiles/frequent_directions.dir/opencsv.cpp.o"
