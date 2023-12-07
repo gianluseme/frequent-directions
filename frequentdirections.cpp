@@ -5,6 +5,5 @@ using namespace Eigen;
 using namespace std;
 
 
-Eigen::MatrixXd FrequentDirections::B;
 
 

@@ -16,7 +16,7 @@
 
 int main1() {
 
-    Eigen::MatrixXd matrice = opencsv::leggiCSVEigen("trafficNew.csv");
+    Eigen::MatrixXd matrice = opencsv::leggiCSVEigen("matricecsv.csv");
 
     //std::cout <<"Matrice letta:\n" << matrice << std::endl;
 
