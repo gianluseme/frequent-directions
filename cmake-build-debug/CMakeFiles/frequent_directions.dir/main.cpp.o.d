@@ -416,4 +416,6 @@ CMakeFiles/frequent_directions.dir/main.cpp.o: \
  /usr/include/c++/11/bits/regex.h /usr/include/c++/11/bits/regex.tcc \
  /usr/include/c++/11/bits/regex_executor.h \
  /usr/include/c++/11/bits/regex_executor.tcc \
- /mnt/c/Users/semeg/CLionProjects/frequent\ directions/frequentdirections.h
+ /mnt/c/Users/semeg/CLionProjects/frequent\ directions/frequentdirections.h \
+ /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
+ /usr/include/c++/11/bits/parse_numbers.h

@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/frequent_directions.dir/main.cpp.o CMakeFiles/frequent_directions.dir/opencsv.cpp.o CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o -o frequent_directions 
+/usr/bin/c++ -g CMakeFiles/frequent_directions.dir/main.cpp.o CMakeFiles/frequent_directions.dir/opencsv.cpp.o -o frequent_directions 

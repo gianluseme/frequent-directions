@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/semeg/CLionProjects/frequent directions/frequentdirections.cpp" "CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o" "gcc" "CMakeFiles/frequent_directions.dir/frequentdirections.cpp.o.d"
   "/mnt/c/Users/semeg/CLionProjects/frequent directions/main.cpp" "CMakeFiles/frequent_directions.dir/main.cpp.o" "gcc" "CMakeFiles/frequent_directions.dir/main.cpp.o.d"
   "/mnt/c/Users/semeg/CLionProjects/frequent directions/opencsv.cpp" "CMakeFiles/frequent_directions.dir/opencsv.cpp.o" "gcc" "CMakeFiles/frequent_directions.dir/opencsv.cpp.o.d"
   )
