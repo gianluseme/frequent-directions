@@ -12,12 +12,15 @@
 #include <regex>
 #include "Eigen/Dense"
 #include <string>
+#include "csv.h"
+#include "opencsv.h"
 
 class FrequentDirections {
 
 public:
 
-    static Eigen::MatrixXd frequentDirections (const int l, const Eigen::MatrixXd& A) {
+    template <int l>
+    static Eigen::MatrixXd frequentDirections (const Eigen::MatrixXd& A, const int d, const std::string& nomeFile) {
 
         int cols = A.cols();
         int rows = A.rows();
@@ -28,12 +31,26 @@ public:
         // Inizializzazione matrice B a zero
         Eigen::MatrixXd B = initB(l, cols);
 
+        bool check = false;
+
+        int countIExceedsLHalf = 0;
+
         for(int i = 0; i < rows; i++) {
+
+            if(i >= l)
+                check = true;
+
+            // Conta quante volte i supera l/2
+            if (i % (l / 2) == 0 && i >= l)
+                countIExceedsLHalf++;
+
+            std::cout << "count: " <<countIExceedsLHalf << std::endl;
 
             std::cout << "\n\n\nRIGA " << i+1 << "\n" << std::endl;
 
             Eigen::RowVectorXd Ai = A.row(i);
-            B = append(Ai, i, l, i, B);
+            B = append<l>(Ai, i, B, check, countIExceedsLHalf);
+
 
         }
 
@@ -55,41 +72,57 @@ public:
 
     }
 
-    static Eigen::MatrixXd append(Eigen::RowVectorXd& Ai, int row, int l, int iteration, Eigen::MatrixXd B) {
+    template <int l>
+    static Eigen::MatrixXd append(Eigen::RowVectorXd& Ai, int row, Eigen::MatrixXd B, const bool check, int count) {
 
-        for(int i = row; i < l; i++) {
-            //std::cout << "\nriga " << i << " di A: " << Ai << std::endl;
-            if((B.row(i).array() == 0).all()) {
-                B.row(i) = Ai;
-                //std::cout << "\nriga " << i << " aggiornata.\n" << std::endl;
-                std::cout << "Aggiunta riga " << i+1 << " di A alla matrice B" << std::endl;
-                return B;
-            }
+
+        if(!check) {
+            B.row(row) = Ai;
+            //std::cout << "\nriga " << i << " aggiornata.\n" << std::endl;
+            std::cout << "Aggiunta riga " << row + 1 << " di A alla matrice B" << std::endl;
         }
+        else {
 
-        B = rotateB(iteration, l, B);
+            int index = (row-(count*(l/2)))-1;
+            std::cout << index << std::endl;
+            if(B.row(index).isZero()) {
+                B.row(index) = Ai;
+                //std::cout << "\nriga " << i << " aggiornata.\n" << std::endl;
+                std::cout << "Aggiunta riga " << row + 1 << " di A alla matrice B (riga " << index+1 << ")" << std::endl;
+            }
+
+            else {
+                B = rotateB<l>(row, B);
+                B.row(index) = Ai;
+            }
+
+
+        }
 
         return B;
 
     }
 
-    static Eigen::MatrixXd rotateB(int i, int l, Eigen::MatrixXd B) {
 
-        std::cout << "Eseguo rotazione della matrice B... (riga " << i+1 << ")\n" << std::endl;
+
+    template<int l>
+    static Eigen::MatrixXd rotateB(int i, Eigen::MatrixXd B) {
+
+        std::cout << "Eseguo rotazione della matrice B... (riga " << i << ")\n" << std::endl;
 
         //provare sia JacobiSVD che BCDSVD della libreria Eigen per calcolare l'SVD
 
-        //JacobiSVD
-        //Eigen::JacobiSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeThinU | Eigen::ComputeThinV);
-
         std::cout << "Calcolo SVD...\n" << std::endl;
 
+        //JacobiSVD
+        Eigen::JacobiSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeThinU | Eigen::ComputeThinV);
+
         //BCDSVD
-        Eigen::BDCSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeThinU | Eigen::ComputeThinV);
+        //Eigen::BDCSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeThinU | Eigen::ComputeThinV);
 
         // Ottenere le matrici U, S e V
         // Eigen::MatrixXd U = svd.matrixU();
-        Eigen::MatrixXd S = svd.singularValues().asDiagonal();
+        Eigen::DiagonalMatrix<double, l> S = svd.singularValues().asDiagonal();
         Eigen::MatrixXd V = svd.matrixV();
 
         //std::cout << "Matrice U:\n" << U << "\n\n";
@@ -103,21 +136,13 @@ public:
         std:: cout << "Calcolo S'...\n" << std::endl;
 
         int halfl = (l/2) - 1;
-        double delta = std::pow(S(halfl, halfl), 2);
+        double delta = std::pow(S.diagonal()(halfl), 2);
 
         //std::cout << "delta = " << delta << "\n" << std::endl;
 
-        for(int i = 0; i < l; i++) {
-            double deltaPrimo = std::sqrt(std::pow((S(i, i)), 2) - delta);
-            if(deltaPrimo > 0) {
-                S(i, i) = deltaPrimo;
-            } else {
-                S(i, i) = 0;
-            }
+        S.diagonal() = (S.diagonal().array().square() - delta).cwiseMax(0).sqrt();
 
-        }
-
-            //std::cout << "\n S':\n" << S << std::endl; // S'
+        //std::cout << "\n S':\n" << S << std::endl; // S'
 
 
         //} else

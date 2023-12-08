@@ -169,6 +169,46 @@ public:
 
     }
 
+     static int nColonne (const std::string& nomeFileCSV) {
+
+
+        // Apri il file CSV
+        std::ifstream file(nomeFileCSV+".csv");
+
+        // Verifica che il file sia stato aperto correttamente
+        if (!file.is_open()) {
+            std::cerr << "Impossibile aprire il file." << std::endl;
+            return 1;
+        }
+
+        // Leggi la prima riga del file
+        std::string firstLine;
+        std::getline(file, firstLine);
+
+        // Utilizza un stringstream per analizzare la prima riga
+        std::istringstream iss(firstLine);
+        std::string value;
+        std::vector<std::string> row;
+
+        // Leggi i valori separati da virgola e memorizzali nel vector
+        while (std::getline(iss, value, ',')) {
+            row.push_back(value);
+        }
+
+        // Ora 'row' contiene i valori della prima riga
+
+        // Determina il numero di colonne
+        int numColumns = row.size();
+
+        // Stampa il numero di colonne
+        std::cout << "Il numero di colonne della matrice è: " << numColumns << std::endl;
+
+        // Chiudi il file dopo aver ottenuto il numero di colonne
+        file.close();
+
+        return numColumns;
+  }
+
 
 };
 

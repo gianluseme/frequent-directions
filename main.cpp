@@ -29,14 +29,17 @@ int main(int argc, char* argv[]) {
     // Registra il tempo di inizio
     auto start = std::chrono::high_resolution_clock::now();
 
-    const int l = 200;
+    const int l = 80;
 
-    std::string nomeFileCSV = "traffic";
+    //n. colonne
+    constexpr int d = 80;
+
+    std::string nomeFileCSV = "matricecsv";
 
     Eigen::MatrixXd matrice = opencsv::leggiCSVEigen(nomeFileCSV+".csv");
 
     // Genera una matrice casuale n x m
-    //Eigen::MatrixXd matrice = Eigen::MatrixXd::Random(250,100);
+    //Eigen::MatrixXd matrice = Eigen::MatrixXd::Random(1000,80);
 
     //std::cout <<"Matrice letta:\n" << matrice << std::endl;
 
@@ -52,7 +55,7 @@ int main(int argc, char* argv[]) {
 
     //opencsv::scriviMatriceSuCSV(matrice, "matricecsv.csv");
 
-    Eigen::MatrixXd matriceRidotta = FrequentDirections::frequentDirections(l, matrice);
+    Eigen::MatrixXd matriceRidotta = FrequentDirections::frequentDirections<l>(matrice, d,nomeFileCSV+".csv");
 
     opencsv::scriviMatriceSuCSV(matriceRidotta, nomeFileCSV+"Ridotto.csv");
 
