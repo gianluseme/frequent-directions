@@ -1,0 +1,3 @@
+C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-mingw/CMakeFiles/frequent_directions.dir
+C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir

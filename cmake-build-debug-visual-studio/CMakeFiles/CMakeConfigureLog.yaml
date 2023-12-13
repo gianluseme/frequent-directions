@@ -1,0 +1,466 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.22621 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.38.33130/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) C/C++ Optimizing Compiler versione 19.38.33133 per x64
+      Copyright (C) Microsoft Corporation. Tutti i diritti  sono riservati.
+      
+      CMakeCCompilerId.c
+      Microsoft (R) Incremental Linker Version 14.38.33133.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCCompilerId.exe 
+      CMakeCCompilerId.obj 
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/3.27.0/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:1158 (message)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Nota: file incluso  C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Nota: file incluso  "
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.38.33130/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) C/C++ Optimizing Compiler versione 19.38.33133 per x64
+      Copyright (C) Microsoft Corporation. Tutti i diritti  sono riservati.
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.38.33133.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/3.27.0/CompilerIdCXX/CMakeCXXCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:1158 (message)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        Nota: file incluso  C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Nota: file incluso  "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-glow1u"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-glow1u"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-glow1u'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_5e908
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_5e908.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_5e908.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_5e908.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_5e908.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_5e908.exe /implib:cmTC_5e908.lib /pdb:cmTC_5e908.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-glow1u && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-glow1u/cmTC_5e908.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-elasv4"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-elasv4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-elasv4'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_ef0cd
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_ef0cd.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_ef0cd.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ef0cd.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ef0cd.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_ef0cd.exe /implib:cmTC_ef0cd.lib /pdb:cmTC_ef0cd.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-elasv4 && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-elasv4/cmTC_ef0cd.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:372 (check_function_exists)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:416 (check_blas_libraries)"
+      - "C:/vcpkg-master/installed/x64-windows/share/blas/vcpkg-cmake-wrapper.cmake:5 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:8 (find_package)"
+    checks:
+      - "Looking for sgemm_"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-pnuhrp"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-pnuhrp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "BLAS_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-pnuhrp'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_f4b7f
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f4b7f.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f4b7f.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-pnuhrp\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f4b7f.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4b7f.dir\\CheckFunctionExists.c.obj  /out:cmTC_f4b7f.exe /implib:cmTC_f4b7f.lib /pdb:cmTC_f4b7f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-pnuhrp && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-pnuhrp/cmTC_f4b7f.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_f4b7f.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f4b7f.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4b7f.dir\\CheckFunctionExists.c.obj  /out:cmTC_f4b7f.exe /implib:cmTC_f4b7f.lib /pdb:cmTC_f4b7f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-pnuhrp && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-pnuhrp/cmTC_f4b7f.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4b7f.dir\\CheckFunctionExists.c.obj /out:cmTC_f4b7f.exe /implib:cmTC_f4b7f.lib /pdb:cmTC_f4b7f.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_f4b7f.dir/intermediate.manifest CMakeFiles\\cmTC_f4b7f.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: riferimento al simbolo esterno sgemm_ non risolto nella funzione main
+        cmTC_f4b7f.exe : fatal error LNK1120: 1 esterni non risolti
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:859 (_find_package)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:468 (find_package)"
+      - "C:/vcpkg-master/installed/x64-windows/share/blas/vcpkg-cmake-wrapper.cmake:5 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:8 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-wy5yly"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-wy5yly"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-wy5yly'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_30411
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_30411.dir\\src.c.obj /FdCMakeFiles\\cmTC_30411.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-wy5yly\\src.c
+        FAILED: CMakeFiles/cmTC_30411.dir/src.c.obj 
+        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_30411.dir\\src.c.obj /FdCMakeFiles\\cmTC_30411.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-wy5yly\\src.c
+        C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-wy5yly\\src.c(1): fatal error C1083: Non è possibile aprire il file inclusione: 'pthread.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:859 (_find_package)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:468 (find_package)"
+      - "C:/vcpkg-master/installed/x64-windows/share/blas/vcpkg-cmake-wrapper.cmake:5 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:8 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-y206e4"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-y206e4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-y206e4'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_c7ffb
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_c7ffb.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_c7ffb.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-y206e4\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_c7ffb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c7ffb.dir\\CheckFunctionExists.c.obj  /out:cmTC_c7ffb.exe /implib:cmTC_c7ffb.lib /pdb:cmTC_c7ffb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-y206e4 && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-y206e4/cmTC_c7ffb.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_c7ffb.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_c7ffb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c7ffb.dir\\CheckFunctionExists.c.obj  /out:cmTC_c7ffb.exe /implib:cmTC_c7ffb.lib /pdb:cmTC_c7ffb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-y206e4 && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-y206e4/cmTC_c7ffb.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c7ffb.dir\\CheckFunctionExists.c.obj /out:cmTC_c7ffb.exe /implib:cmTC_c7ffb.lib /pdb:cmTC_c7ffb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_c7ffb.dir/intermediate.manifest CMakeFiles\\cmTC_c7ffb.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: impossibile aprire il file 'pthreads.lib'
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:859 (_find_package)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:468 (find_package)"
+      - "C:/vcpkg-master/installed/x64-windows/share/blas/vcpkg-cmake-wrapper.cmake:5 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:8 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hcf3we"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hcf3we"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hcf3we'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_40832
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_40832.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_40832.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-hcf3we\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_40832.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_40832.dir\\CheckFunctionExists.c.obj  /out:cmTC_40832.exe /implib:cmTC_40832.lib /pdb:cmTC_40832.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-hcf3we && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hcf3we/cmTC_40832.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_40832.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_40832.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_40832.dir\\CheckFunctionExists.c.obj  /out:cmTC_40832.exe /implib:cmTC_40832.lib /pdb:cmTC_40832.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-hcf3we && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hcf3we/cmTC_40832.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_40832.dir\\CheckFunctionExists.c.obj /out:cmTC_40832.exe /implib:cmTC_40832.lib /pdb:cmTC_40832.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_40832.dir/intermediate.manifest CMakeFiles\\cmTC_40832.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: impossibile aprire il file 'pthread.lib'
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:372 (check_function_exists)"
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/FindBLAS.cmake:753 (check_blas_libraries)"
+      - "C:/vcpkg-master/installed/x64-windows/share/blas/vcpkg-cmake-wrapper.cmake:5 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:8 (find_package)"
+    checks:
+      - "Looking for sgemm_"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hbhrzw"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hbhrzw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "BLAS_openblas_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hbhrzw'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_f7943
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f7943.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f7943.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-hbhrzw\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f7943.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f7943.dir\\CheckFunctionExists.c.obj  /out:cmTC_f7943.exe /implib:cmTC_f7943.lib /pdb:cmTC_f7943.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-hbhrzw && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-hbhrzw/cmTC_f7943.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:176 (check_function_exists)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:287 (check_lapack_libraries)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/vcpkg-cmake-wrapper.cmake:9 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:9 (find_package)"
+    checks:
+      - "Looking for cheev_"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-iou67l"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-iou67l"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/vcpkg-master/installed/x64-windows/share/lapack"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "LAPACK_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-iou67l'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_858e6
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_858e6.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_858e6.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-iou67l\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_858e6.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_858e6.dir\\CheckFunctionExists.c.obj  /out:cmTC_858e6.exe /implib:cmTC_858e6.lib /pdb:cmTC_858e6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-iou67l && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-iou67l/cmTC_858e6.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_858e6.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_858e6.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_858e6.dir\\CheckFunctionExists.c.obj  /out:cmTC_858e6.exe /implib:cmTC_858e6.lib /pdb:cmTC_858e6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-iou67l && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-iou67l/cmTC_858e6.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_858e6.dir\\CheckFunctionExists.c.obj /out:cmTC_858e6.exe /implib:cmTC_858e6.lib /pdb:cmTC_858e6.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_858e6.dir/intermediate.manifest CMakeFiles\\cmTC_858e6.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: riferimento al simbolo esterno cheev_ non risolto nella funzione main
+        cmTC_858e6.exe : fatal error LNK1120: 1 esterni non risolti
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:176 (check_function_exists)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:350 (check_lapack_libraries)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/vcpkg-cmake-wrapper.cmake:9 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:9 (find_package)"
+    checks:
+      - "Looking for cheev_"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-x9qx4l"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-x9qx4l"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/vcpkg-master/installed/x64-windows/share/lapack"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "LAPACK_openblas_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-x9qx4l'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_f1f30
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f1f30.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f1f30.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-x9qx4l\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f1f30.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f1f30.dir\\CheckFunctionExists.c.obj  /out:cmTC_f1f30.exe /implib:cmTC_f1f30.lib /pdb:cmTC_f1f30.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-x9qx4l && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-x9qx4l/cmTC_f1f30.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_f1f30.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f1f30.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f1f30.dir\\CheckFunctionExists.c.obj  /out:cmTC_f1f30.exe /implib:cmTC_f1f30.lib /pdb:cmTC_f1f30.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-x9qx4l && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-x9qx4l/cmTC_f1f30.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f1f30.dir\\CheckFunctionExists.c.obj /out:cmTC_f1f30.exe /implib:cmTC_f1f30.lib /pdb:cmTC_f1f30.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_f1f30.dir/intermediate.manifest CMakeFiles\\cmTC_f1f30.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: riferimento al simbolo esterno cheev_ non risolto nella funzione main
+        cmTC_f1f30.exe : fatal error LNK1120: 1 esterni non risolti
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/JetBrains/CLion 2023.3/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:176 (check_function_exists)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/FindLAPACK.cmake:457 (check_lapack_libraries)"
+      - "C:/vcpkg-master/installed/x64-windows/share/lapack/vcpkg-cmake-wrapper.cmake:9 (_find_package)"
+      - "C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake:813 (include)"
+      - "CMakeLists.txt:9 (find_package)"
+    checks:
+      - "Looking for cheev_"
+    directories:
+      source: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-1ychj8"
+      binary: "C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-1ychj8"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/vcpkg-master/installed/x64-windows/share/lapack"
+      VCPKG_APPLOCAL_DEPS: "ON"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg-master"
+    buildResult:
+      variable: "LAPACK_lapack_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-1ychj8'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -v cmTC_a6f21
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_a6f21.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_a6f21.dir\\ /FS -c C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-1ychj8\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2023.3\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a6f21.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a6f21.dir\\CheckFunctionExists.c.obj  /out:cmTC_a6f21.exe /implib:cmTC_a6f21.lib /pdb:cmTC_a6f21.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\lapack.lib  C:\\vcpkg-master\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\semeg\\CLionProjects\\frequent_directions\\cmake-build-debug-visual-studio\\CMakeFiles\\CMakeScratch\\TryCompile-1ychj8 && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg-master/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio/CMakeFiles/CMakeScratch/TryCompile-1ychj8/cmTC_a6f21.exe -installedDir C:/vcpkg-master/installed/x64-windows/debug/bin -OutVariable out""
+        
+      exitCode: 0
+...

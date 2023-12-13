@@ -1,0 +1,20 @@
+# ninja log v5
+6	3216	7241090668012069	CMakeFiles/frequent_directions.dir/opencsv.cpp.obj	f838a5f858067daf
+6	3079	7241973425106080	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+3080	3790	7241973426231616	frequent_directions.exe	37b63bebede91c7f
+16	4799	7241939964004103	CMakeFiles/frequent_directions.dir/frequent_directions.cpp.obj	9db98d502df32b11
+9	8395	7241987812800062	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+8410	9920	7241987816164606	frequent_directions.exe	55b6344eeb3e0126
+15	6103	7241988372647009	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+6103	6925	7241988374219113	frequent_directions.exe	55b6344eeb3e0126
+8	4573	7241990150232473	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+4574	5487	7241990151932561	frequent_directions.exe	55b6344eeb3e0126
+10	5284	7241996906933496	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+5285	6176	7241996908555376	frequent_directions.exe	55b6344eeb3e0126
+9	5088	7241997571785958	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+5089	6029	7241997574240417	frequent_directions.exe	55b6344eeb3e0126
+11	3601	7242000026968077	CMakeFiles/frequent_directions.dir/frequent_directions.cpp.obj	9db98d502df32b11
+7	4953	7242000040361744	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+4954	6431	7242000043838456	frequent_directions.exe	55b6344eeb3e0126
+7	4624	7242001440790714	CMakeFiles/frequent_directions.dir/main.cpp.obj	bdd8ab42181e5a87
+4625	5512	7242001442240100	frequent_directions.exe	55b6344eeb3e0126

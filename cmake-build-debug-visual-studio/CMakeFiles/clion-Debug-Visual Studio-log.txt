@@ -1,0 +1,7 @@
+"C:\Program Files\JetBrains\CLion 2023.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.3/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg-master/scripts/buildsystems/vcpkg.cmake -G Ninja -S C:\Users\semeg\CLionProjects\frequent_directions -B C:\Users\semeg\CLionProjects\frequent_directions\cmake-build-debug-visual-studio
+-- Found blaze
+-- Using VCPKG FindLAPACK from package 'lapack-reference'
+-- A library with LAPACK API found.
+-- Configuring done (2.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio
