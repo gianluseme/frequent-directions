@@ -21,6 +21,7 @@ using blaze::blas_int_t;
 using blaze::gesvd;
 using blaze::StaticMatrix;
 using blaze::columnMajor;
+using blaze::gesdd;
 
 
 class frequent_directions {
@@ -127,27 +128,10 @@ public:
         // Allocazione per la matrice V
         DynamicMatrix<double> V;
         //V.resize(B.columns(), B.columns());
+        //DynamicMatrix<double> U;
 
-        DynamicMatrix<double> U;
-
-        svd(B, U, S, V);
-
-        // Ottenere puntatori ai dati della matrice Blaze
-        /*double* Adata = B.data();
-        std::ptrdiff_t lda = std::max<blaze::blas_int_t>(1, B.rows()); // Leading dimension
-
-        // Lavoro ausiliario per la funzione gesvd
-        double work_query;
-        blas_int_t lwork = -1;
-        blas_int_t info;
-
-        gesvd('N', 'S', B.rows(), B.columns(), Adata, lda, S.data(), nullptr, 1, V.data(), B.columns(), &work_query, lwork, &info);
-
-        lwork = static_cast<blaze::blas_int_t>(work_query);
-        std::vector<double> work(lwork);
-
-        gesvd('N', 'S', B.rows(), B.columns(), Adata, lda, S.data(), nullptr, 1, V.data(), B.columns(), work.data(), lwork, &info);
-*/
+        gesvd(B, S, V, 'N', 'S');
+        //gesdd(B, U, S, V, 'S');
 
         int halfl = (l/2) - 1;
 

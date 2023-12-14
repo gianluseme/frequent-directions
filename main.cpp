@@ -13,6 +13,7 @@ using blaze::columnVector;
 using blaze::blas_int_t;
 using blaze::gesvd;
 using blaze::StaticMatrix;
+using blaze::gesdd;
 
 int main() {
 
@@ -20,9 +21,9 @@ int main() {
     auto start_time = std::chrono::high_resolution_clock::now();
 
     constexpr int l = 200;
-    int d = 862;
+    int d = 100;
 
-    std::string nomeFileCSV = "trafficNew";
+    std::string nomeFileCSV = "matrice";
 
     DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream<l>(nomeFileCSV+".csv", d);
     opencsv::scriviMatriceSuCSV(matriceRidotta, nomeFileCSV+"Ridotto.csv");
