@@ -9,16 +9,18 @@ find_package(LAPACK REQUIRED)
 find_package(OpenBLAS REQUIRED)
 find_package(Armadillo REQUIRED)
 
-
+# Configura Blaze per il linking statico
+set(BLAZE_USE_STATIC TRUE)
+add_definitions(${BLAZE_DEFINITIONS})
 
 add_executable(frequent_directions main.cpp
         opencsv.cpp
         opencsv.h
         frequent_directions.cpp
         frequent_directions.h)
+
 target_link_libraries(frequent_directions PRIVATE blaze::blaze)
 target_link_libraries(frequent_directions PRIVATE LAPACK::LAPACK)
 target_link_libraries(frequent_directions PRIVATE BLAS::BLAS)
 target_link_libraries(frequent_directions PRIVATE OpenBLAS::OpenBLAS)
 target_link_libraries(frequent_directions PRIVATE ${ARMADILLO_LIBRARIES})
-

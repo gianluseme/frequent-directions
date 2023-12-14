@@ -2,6 +2,6 @@
 -- Found blaze
 -- Using VCPKG FindLAPACK from package 'lapack-reference'
 -- A library with LAPACK API found.
--- Configuring done (2.5s)
+-- Configuring done (2.6s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/semeg/CLionProjects/frequent_directions/cmake-build-debug-visual-studio
