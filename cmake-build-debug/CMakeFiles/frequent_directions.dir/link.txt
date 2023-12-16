@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/frequent_directions.dir/main.cpp.o -o frequent_directions  /usr/lib/x86_64-linux-gnu/libmkl_intel_lp64.so /usr/lib/x86_64-linux-gnu/libmkl_intel_thread.so /usr/lib/x86_64-linux-gnu/libmkl_core.so /usr/lib/x86_64-linux-gnu/libiomp5.so -lm -ldl 

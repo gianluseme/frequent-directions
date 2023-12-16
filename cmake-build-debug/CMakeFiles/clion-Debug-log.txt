@@ -1,0 +1,6 @@
+C:\WINDOWS\system32\wsl.exe --distribution Ubuntu --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd '/home/semeg/frequent directions/cmake-build-debug' && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S '/home/semeg/frequent directions' -B '/home/semeg/frequent directions/cmake-build-debug'"
+-- Found blaze
+-- Blaze version: 3.9
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/semeg/frequent directions/cmake-build-debug
