@@ -162,6 +162,28 @@ public:
         file.close();
     }
 
+    static void appendCSV (int l, int timeFd, int timeTotal, double accuracy, std::string nomeFile) {
+
+        // Apri il file in modalità append
+        std::ofstream file(nomeFile, std::ios::app);
+
+        if (!file.is_open()) {
+            std::cerr << "Errore nell'apertura del file." << std::endl;
+            return;
+        }
+
+        // Crea una stringa contenente i valori separati da virgole
+        std::ostringstream row;
+        row << l << ',' << timeFd << ',' << timeTotal << ',' << accuracy << '\n';
+
+        // Scrivi la riga nel file
+        file << row.str();
+
+        // Chiudi il file
+        file.close();
+
+    }
+
 };
 
 

@@ -14,6 +14,8 @@
 #include "opencsv.h"
 #include "frequent_directions.h"
 #include <cxxopts.hpp>
+#include <filesystem>
+
 
 
 using blaze::DynamicMatrix;
@@ -26,17 +28,19 @@ using blaze::gesdd;
 
 int main(int argc, char* argv[]) {
 
-    // Argomenti: file di input, l (numero di righe della matrice ridotta), d(n. colonne),
+    // Argomenti: file di input, l (numero di righe della matrice ridotta),
     // parametro per scegliere tra la funzione gesvd e gesdd (default gesvd), modalità di funzionamento (solo riduzione/calcolo accuratezza, default solo riduzione)
 
     // Registra il tempo di inizio
     auto start_time = std::chrono::high_resolution_clock::now();
 
     int l;
-    int d;
     std::string nomeFileCSV;
     bool svd;
     bool mode;
+    bool bench = false;
+
+    int timeFd;
 
     cxxopts::Options options("Frequent Directions", "Descrizione del programma");
 
@@ -44,9 +48,9 @@ int main(int argc, char* argv[]) {
             ("h,help", "Mostra l'aiuto")
             ("i,input", "File di input (.csv)", cxxopts::value<std::string>())
             ("l", "N. righe della matrice ridotta", cxxopts::value<int>())
-            ("d", "N. colonne della matrice ridotta", cxxopts::value<int>())
             ("svd", "Scelta tra gesvd e gesdd", cxxopts::value<std::string>()->default_value("gesvd"))
-            ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"));
+            ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"))
+            ("bench", "Abilia la modalità di benchmark");
 
     try {
 
@@ -57,14 +61,13 @@ int main(int argc, char* argv[]) {
             return 0;
         }
 
-        if (!result.count("input") || !result.count("l") || !result.count("d")) {
-            std::cerr << "Errore: Le opzioni input, l e d sono obbligatorie." << std::endl;
+        if (!result.count("input") || !result.count("l")) {
+            std::cerr << "Errore: Le opzioni --input e -l sono obbligatorie." << std::endl;
             return 1;
         }
 
         nomeFileCSV = result["input"].as<std::string>();
         l = result["l"].as<int>();
-        d = result["d"].as<int>();
 
         if(result["svd"].as<std::string>() == "gesvd")
             svd = true;
@@ -84,47 +87,134 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
+        if(result.count("bench"))
+            bench = true;
+
 
     } catch (const cxxopts::exceptions::parsing& e) {
         std::cerr << "Errore nell'analisi degli argomenti: " << e.what() << std::endl;
         return 1;
     }
 
+    std::ostringstream convertitore;
+    convertitore << l;
+    std::string lString = convertitore.str();
 
-    //constexpr int l = 200;
-    //int d = 862;
-
-    //std::string nomeFileCSV = "trafficNew";
 
     if(mode) {
 
-        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, d, svd);
-        opencsv::scriviMatriceSuCSV(matriceRidotta, "sketch_" + nomeFileCSV);
+        auto start_timeFd = std::chrono::high_resolution_clock::now();
+
+        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+
+        auto end_timeFd = std::chrono::high_resolution_clock::now();
+
+        timeFd = std::chrono::duration_cast<std::chrono::milliseconds >(end_timeFd - start_timeFd).count();
+
+        if(svd)
+            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV);
+        else
+            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV);
+
+        // Registra il tempo di fine
+        auto end_time = std::chrono::high_resolution_clock::now();
+
+        // Calcola la durata in millisecondi
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+
+        std::cout << "Tempo di esecuzione di Frequent Directions: " << timeFd << " millisecondi" << std::endl;
+
+        // Stampa il tempo di esecuzione
+        std::cout << "Tempo totale di esecuzione: " << duration.count() << " millisecondi" << std::endl;
 
     } else {
 
         DynamicMatrix<double> matrice = opencsv::leggiCSV(nomeFileCSV);
-        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, matrice, svd);
-        opencsv::scriviMatriceSuCSV(matriceRidotta, "sketch_" + nomeFileCSV);
-        frequent_directions::accuracyTest(matrice, matriceRidotta);
+        DynamicMatrix<double> matriceRidotta;
+
+        if(bench) {
+
+            std::vector<int> timesFd;
+
+            for(int i = 0; i < 10; i++) {
+
+                auto start_timeFd = std::chrono::high_resolution_clock::now();
+
+                matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, matrice, svd);
+
+                auto end_timeFd = std::chrono::high_resolution_clock::now();
+
+                timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
+
+                timesFd.push_back(timeFd);
+
+            }
+
+            double sum = 0.0;
+            for(const auto& element : timesFd)
+                sum += element;
+
+            timeFd = timesFd.empty() ? 0.0 : sum / timesFd.size();
+
+        } else {
+
+            auto start_timeFd = std::chrono::high_resolution_clock::now();
+
+            matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, matrice, svd);
+
+            auto end_timeFd = std::chrono::high_resolution_clock::now();
+
+            timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
+
+        }
+
+
+        if(svd)
+            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV);
+        else
+            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV);
+
+        const double accuracy = frequent_directions::accuracyTest(matrice, matriceRidotta);
+
+        // Registra il tempo di fine
+        auto end_time = std::chrono::high_resolution_clock::now();
+
+        // Calcola la durata in millisecondi
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+
+        std::cout << "Tempo di esecuzione di Frequent Directions: " << timeFd << " millisecondi" << std::endl;
+
+        // Stampa il tempo di esecuzione
+        std::cout << "Tempo totale di esecuzione: " << duration.count() << " millisecondi" << std::endl;
+
+        if(svd) {
+
+            std::filesystem::path filePath = "./results/gesvd/list/results_list_" + nomeFileCSV;
+
+            // Verifica e crea le directory se non esistono
+            if (!std::filesystem::exists(filePath.parent_path())) {
+                std::filesystem::create_directories(filePath.parent_path());
+            }
+
+            opencsv::appendCSV(l, timeFd, duration.count(), accuracy,filePath);
+
+        } else {
+
+            std::filesystem::path filePath = "./results/gesdd/list/results_list_" + nomeFileCSV;
+
+            // Verifica e crea le directory se non esistono
+            if (!std::filesystem::exists(filePath.parent_path())) {
+                std::filesystem::create_directories(filePath.parent_path());
+            }
+
+            opencsv::appendCSV(l, timeFd, duration.count(), accuracy,filePath);
+
+        }
+
+
 
     }
 
-    //DynamicMatrix<double> matrice = opencsv::leggiCSV(nomeFileCSV+".csv");
-
-    //DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirections<l>(nomeFileCSV+, matrice, svd);
-    //opencsv::scriviMatriceSuCSV(matriceRidotta, nomeFileCSV+"Ridotto.csv");
-
-    //frequent_directions::accuracyTest(matrice, matriceRidotta);
-
-    // Registra il tempo di fine
-    auto end_time = std::chrono::high_resolution_clock::now();
-
-    // Calcola la durata in millisecondi
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-
-    // Stampa il tempo di esecuzione
-    std::cout << "Tempo di esecuzione: " << duration.count() << " milliseconds" << std::endl;
 
     return 0;
 }

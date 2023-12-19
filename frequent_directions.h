@@ -60,10 +60,8 @@ public:
     }
 
 
-    static DynamicMatrix<double> frequentDirectionsStream(int l, const std::string& nomeFile, int cols, bool svd) {
+    static DynamicMatrix<double> frequentDirectionsStream(int l, const std::string& nomeFile, bool svd) {
 
-        DynamicMatrix<double> B(2*l, cols, 0.0);
-        DynamicVector<double> row(cols);
 
         std::ifstream file(nomeFile, std::ios::binary);
 
@@ -100,6 +98,18 @@ public:
         }
 
         std::string line;
+        std::getline(file, line);
+
+        std::istringstream iss(line);
+        std::string field;
+        int columnCount = 0;
+
+        while (std::getline(iss, field, ',')) {
+            ++columnCount;
+        }
+
+        DynamicMatrix<double> B(2*l, columnCount, 0.0);
+        DynamicVector<double> row(columnCount);
 
         //tiene traccia della riga della matrice A
         int i = 0;
@@ -112,8 +122,7 @@ public:
             std::istringstream iss(line);
             std::string value;
 
-
-            for (int j = 0; j < cols && std::getline(iss, value, ','); ++j) {
+            for (int j = 0; j < columnCount && std::getline(iss, value, ','); ++j) {
                 // Converti il valore da stringa a double e aggiungilo alla riga
                 row[j] = std::stod(value);
             }
@@ -129,7 +138,6 @@ public:
         }
 
         B = submatrix(B,0UL, 0UL, l, B.columns());
-        //return blaze::submatrix(B,0UL, 0UL, l, B.columns());
         return B;
 
     }
@@ -237,12 +245,12 @@ public:
 
     }
 
-    static void accuracyTest(DynamicMatrix<double> A, DynamicMatrix<double> B) {
+    static double accuracyTest(DynamicMatrix<double> A, DynamicMatrix<double> B) {
 
         DynamicMatrix<double> diff = (trans(A) * A) - (trans(B) * B);
-        std::cout << "Hello" << std::endl;
-        const double l1norm = blaze::l1Norm(diff);
-        std::cout << "Accuracy: " << l1norm << std::endl;
+        const double accuracy = blaze::l2Norm(diff);
+        std::cout << "Accuracy: " << accuracy << std::endl;
+        return accuracy;
 
     }
 
