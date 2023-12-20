@@ -12,10 +12,36 @@
 #include <fstream>
 #include <sstream>
 #include <blaze/Math.h>
+#include <algorithm>
 
 using blaze::DynamicMatrix;
 
 class opencsv {
+
+    struct CSVRow {
+        int l;
+        int timeFd;
+        int timeTotal;
+        double accuracy;
+
+        // Operatori per confronto e ordinamento
+        bool operator<(const CSVRow& other) const {
+            return l < other.l;
+        }
+
+        // Operatore di uguaglianza per cercare una riga con lo stesso valore di l
+        bool operator==(int value) const {
+            return l == value;
+        }
+    };
+
+    struct CSVString {
+        int l;
+        std::string timeFd;
+        std::string timeTotal;
+        std::string accuracy;
+    };
+
 
 public:
 
@@ -162,27 +188,60 @@ public:
         file.close();
     }
 
-    static void appendCSV (int l, int timeFd, int timeTotal, double accuracy, std::string nomeFile) {
+    static void appendCSV(int l, int timeFd, int timeTotal, double accuracy, const std::string& nomeFile) {
+        // Vettore per contenere le righe del file CSV
+        std::vector<CSVRow> rows;
 
-        // Apri il file in modalità append
-        std::ofstream file(nomeFile, std::ios::app);
+        // Leggi il contenuto attuale del file
+        std::ifstream inputFile(nomeFile);
 
-        if (!file.is_open()) {
-            std::cerr << "Errore nell'apertura del file." << std::endl;
-            return;
+        CSVRow row;
+
+        for (CSVString i; (inputFile >> i.l).ignore(std::numeric_limits<std::streamsize>::max(), ',') &&
+                       std::getline(inputFile, i.timeFd, ',') &&
+                       std::getline(inputFile, i.timeTotal, ',') &&
+                       std::getline(inputFile, i.accuracy); ) {
+
+            // Converti le stringhe lette in interi e double
+            row.l = i.l;
+            row.timeFd = std::stoi(i.timeFd);
+            row.timeTotal = std::stoi(i.timeTotal);
+            row.accuracy = std::stod(i.accuracy);
+
+            rows.push_back(row);
         }
 
-        // Crea una stringa contenente i valori separati da virgole
-        std::ostringstream row;
-        row << l << ',' << timeFd << ',' << timeTotal << ',' << accuracy << '\n';
+        inputFile.close();
 
-        // Scrivi la riga nel file
-        file << row.str();
+        // Cerca una riga con lo stesso valore di l
+        auto it = std::find_if(rows.begin(), rows.end(), [l](const CSVRow& existingRow) {
+            return existingRow.l == l;
+        });
 
-        // Chiudi il file
-        file.close();
+        // Se trovi una riga con lo stesso valore di l, sostituisci i dati
+        if (it != rows.end()) {
+            it->timeFd = timeFd;
+            it->timeTotal = timeTotal;
+            it->accuracy = accuracy;
+        } else {
+            // Altrimenti, aggiungi una nuova riga
+            rows.push_back({l, timeFd, timeTotal, accuracy});
+        }
 
+        // Ordina le righe in base a l
+        std::sort(rows.begin(), rows.end());
+
+        // Apri il file in modalità out
+        std::ofstream outputFile(nomeFile, std::ios::out);
+
+        // Scrivi le righe ordinate nel file
+        for (const auto& updatedRow : rows) {
+            outputFile << updatedRow.l << ',' << updatedRow.timeFd << ',' << updatedRow.timeTotal << ',' << updatedRow.accuracy << '\n';
+        }
+
+        outputFile.close();
     }
+
 
 };
 

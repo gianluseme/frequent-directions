@@ -169,10 +169,28 @@ int main(int argc, char* argv[]) {
         }
 
 
-        if(svd)
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV);
-        else
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV);
+        if(svd) {
+
+            std::filesystem::path filePath = "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV;
+
+            // Verifica e crea le directory se non esistono
+            if (!std::filesystem::exists(filePath.parent_path())) {
+                std::filesystem::create_directories(filePath.parent_path());
+            }
+
+            opencsv::scriviMatriceSuCSV(matriceRidotta, filePath);
+        }
+        else {
+
+            std::filesystem::path filePath = "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV;
+
+            // Verifica e crea le directory se non esistono
+            if (!std::filesystem::exists(filePath.parent_path())) {
+                std::filesystem::create_directories(filePath.parent_path());
+            }
+
+            opencsv::scriviMatriceSuCSV(matriceRidotta, filePath);
+        }
 
         const double accuracy = frequent_directions::accuracyTest(matrice, matriceRidotta);
 
@@ -210,7 +228,6 @@ int main(int argc, char* argv[]) {
             opencsv::appendCSV(l, timeFd, duration.count(), accuracy,filePath);
 
         }
-
 
 
     }
