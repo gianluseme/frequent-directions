@@ -77,13 +77,11 @@ public:
         //BOM per codifica UTF-8
         if (bom[0] == static_cast<char>(0xEF) && bom[1] == static_cast<char>(0xBB) &&
             bom[2] == static_cast<char>(0xBF)) {
-            std::cout << "Il file ha il BOM per la codifica UTF-8" << std::endl;
             file.ignore(3); // Ignora i primi 3 byte
         }
             //BOM per codifica UTF-16 (little-endian o big-endian)
         else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE)) ||
                  (bom[0] == static_cast<char>(0xFE) && bom[1] == static_cast<char>(0xFF))) {
-            std::cout << "Il file ha il BOM per la codifica UTF-16" << std::endl;
             file.ignore(2); // Ignora i primi 2 byte
         }
             // BOM per codifica UTF-16 (little-endian o big-endian)
@@ -91,10 +89,8 @@ public:
                   bom[2] == static_cast<char>(0x00) && bom[3] == static_cast<char>(0x00)) ||
                  (bom[0] == static_cast<char>(0x00) && bom[1] == static_cast<char>(0x00) &&
                   bom[2] == static_cast<char>(0xFE) && bom[3] == static_cast<char>(0xFF))) {
-            std::cout << "Il file ha il BOM per la codifica UTF-32" << std::endl;
             file.ignore(4); // Ignora i primi 4 byte
-        } else
-            std::cout << "Il file non presenta BOM" << std::endl;
+        }
 
 
         if (!file.is_open()) {
@@ -165,8 +161,6 @@ public:
 
         int righe = matrice.rows();
         int colonne = matrice.columns();
-
-        std::cout << "n. righe: " << righe << "\nn. colonne: " << colonne << std::endl;
 
         // Scrive ogni elemento della matrice nel file CSV
         for (int i = 0; i < righe; i++) {
