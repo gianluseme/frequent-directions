@@ -12,6 +12,8 @@ file_di_grandi_dimensioni = "largeMatrix.csv"
 # Definisci i valori di l da considerare
 l_values = [10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
 
+l_values_1 = [3000, 4000, 5000, 7500, 10000]
+
 
 # Funzione per eseguire il programma C++
 def esegui_programma(file_input, l, svd_option):
@@ -30,7 +32,7 @@ def esegui_programma_per_tutti_i_file():
     start_time = time.time()  # Registra il tempo di inizio
     for svd_value in ["gesvd", "gesdd"]:
         for file_input in [file_di_piccole_dimensioni, file_di_medie_dimensioni, file_di_grandi_dimensioni]:
-            for l_value in l_values:
+            for l_value in l_values_1:
                 print(f"Esecuzione per l = {l_value} su {file_input}...")
                 esegui_programma(file_input, l_value, svd_value)
     end_time = time.time()  # Registra il tempo di fine
