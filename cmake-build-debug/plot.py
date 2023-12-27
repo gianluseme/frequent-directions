@@ -18,15 +18,15 @@ for svd_value in svd:
         accuracies = data.iloc[:, 3] # Quarta colonna (accuratezza)
 
         # Imposta le dimensioni della figura
-        plt.figure(figsize=(18, 8))  # Imposta le dimensioni desiderate (larghezza x altezza)
+        plt.figure(figsize=(16, 8))  # Imposta le dimensioni desiderate (larghezza x altezza)
 
 
         # Crea un grafico
-        plt.plot(l_values, tempo_di_esecuzione, marker='o', linestyle='-')
+        plt.plot(l_values, tempo_di_esecuzione, linestyle='-', linewidth=3.0, alpha=0.7)
 
         # Aggiungi etichette e titoli
         plt.xlabel('l')
-        plt.ylabel('Tempo di esecuzione')
+        plt.ylabel('Tempo di esecuzione (ms)')
         plt.title('Grafico '+file_name+' (l e tempo di esecuzione)')
 
         # Imposta valori personalizzati sull'asse x
@@ -34,13 +34,14 @@ for svd_value in svd:
         plt.xticks(ticks=custom_ticks)
         # plt.yticks(tempo_di_esecuzione)
 
-        # Salva il grafico in un file
+
+    # Salva il grafico in un file
         plt.savefig('results/'+svd_value+'/grafico_tempoDiEsecuzione_'+file_name+'.png')
 
-        plt.figure(figsize=(18, 8))  # Imposta le dimensioni desiderate (larghezza x altezza)
+        plt.figure(figsize=(16, 8))  # Imposta le dimensioni desiderate (larghezza x altezza)
 
 
-        plt.plot(l_values, accuracies, marker='o', linestyle='-')
+        plt.plot(l_values, accuracies, linestyle='-', linewidth=3.0, alpha=0.7)
 
         plt.xlabel('l')
         plt.ylabel('Accuratezza')
@@ -48,6 +49,7 @@ for svd_value in svd:
 
         custom_ticks = [10, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7500, 10000]  # Modifica questa lista con i tuoi valori desiderati
         plt.xticks(ticks=custom_ticks)
+
 
         plt.savefig('results/'+svd_value+'/grafico_accuracy_'+file_name+'.png')
 
