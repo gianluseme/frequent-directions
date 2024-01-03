@@ -254,6 +254,26 @@ public:
 
     }
 
+    static double boundCalculation(DynamicMatrix<double> A, int l) {
+
+        double norm = blaze::l2Norm(A);
+        return 2*(norm * norm)/l;
+
+    }
+
+    static void boundCalculationIter(DynamicMatrix<double> A) {
+
+        double norm = blaze::sqrNorm(A); //norma di frobenius al quadrato
+
+        std::vector<int> ls = {10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000, 3000, 4000, 5000, 7500, 10000};
+
+        for(int i = 0; i < ls.size(); i++) {
+            double bound = 2*(norm)/ls[i];
+            std::cout << bound << std::endl;
+        }
+
+    }
+
 };
 
 

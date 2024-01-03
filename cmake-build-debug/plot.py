@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-file_names = ['matrice.csv', 'mediumMatrix.csv', 'largeMatrix.csv']
+file_names = [ 'smallMatrix1.csv', 'mediumMatrix1.csv', 'largeMatrix1.csv']
 svd = ['gesdd', 'gesvd']
 
 for svd_value in svd:

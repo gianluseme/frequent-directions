@@ -8,6 +8,7 @@ find_package(LAPACK REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(frequent_directions main.cpp)
+add_executable(frequent_directions main.cpp
+)
 
 target_link_libraries(frequent_directions PRIVATE LAPACK::LAPACK)
