@@ -34,7 +34,7 @@ else:
 norm_frobenius = np.linalg.norm(A, ord='fro')
 
 
-file_path = './results/'+svd+'/sketch_l'+ str(l_value) +nomeFileCSV
+file_path = './results/'+svd+'/sketch_l'+ str(l_value) + "_" + nomeFileCSV
 
 df1 = pd.read_csv(file_path, header=None)
 B = df1.values
