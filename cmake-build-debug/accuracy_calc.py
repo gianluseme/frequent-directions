@@ -40,7 +40,7 @@ df1 = pd.read_csv(file_path, header=None)
 B = df1.values
 
 # Calcola la norma di Frobenius
-norm_frobenius_B = np.linalg.norm(B, ord='fro')
+norm_frobenius_A = np.linalg.norm(A, ord='fro')
 
 # Calcola l'accuracy
 diff = A.T @ A - B.T @ B
@@ -51,7 +51,7 @@ existing_row = df_result[df_result['l'] == l_value]
 
 if not existing_row.empty:
     # Se trovi una riga con lo stesso valore di 'l', sostituisci i dati
-    df_result.loc[existing_row.index, ['timeFd', 'bound', 'accuracy']] = [timeFd_value, 2 * (norm_frobenius_B ** 2) / l_value, accuracy]
+    df_result.loc[existing_row.index, ['timeFd', 'bound', 'accuracy']] = [timeFd_value, 2 * (norm_frobenius_A ** 2) / l_value, accuracy]
 else:
     # Aggiungi le nuove informazioni al DataFrame
     new_row = pd.DataFrame({'l': [l_value], 'timeFd': [timeFd_value], 'bound': [2 * (norm_frobenius_B ** 2) / l_value], 'accuracy': [accuracy]})
