@@ -5,7 +5,7 @@ import os
 
 # Assicurati di avere almeno 2 argomenti (nome dello script + valore di l)
 if len(sys.argv) < 5:
-    print("Usage: python script.py <l_value> <timeFd_value> <svd> <fileName>")
+    print("Usage: python script.py <l_value> <timeFd_value> <svd> <fileName> <lsize>")
     sys.exit(1)
 
 # Ottieni il valore di l dalla riga di comando
@@ -17,7 +17,12 @@ svd = str(sys.argv[3])
 
 nomeFileCSV = str(sys.argv[4])
 
-filePath = './results/'+svd+'/list/results_' + nomeFileCSV
+lsize = str(sys.argv[5])
+
+if lsize == '2':
+    filePath = './results/'+svd+'/list/results_' + nomeFileCSV
+if lsize == '1':
+    filePath = './results/'+svd+'/list/results_1_' + nomeFileCSV
 
 df = pd.read_csv(nomeFileCSV, header=None)
 A = df.values
@@ -33,8 +38,10 @@ else:
 # Calcola la norma di Frobenius
 norm_frobenius = np.linalg.norm(A, ord='fro')
 
-
-file_path = './results/'+svd+'/sketch_l'+ str(l_value) + "_" + nomeFileCSV
+if lsize == '2':
+    file_path = './results/'+svd+'/sketch_l'+ str(l_value) + "_" + nomeFileCSV
+if lsize == '1':
+    file_path = './results/'+svd+'/sketch_1_l'+ str(l_value) + "_" + nomeFileCSV
 
 df1 = pd.read_csv(file_path, header=None)
 B = df1.values
@@ -54,7 +61,7 @@ if not existing_row.empty:
     df_result.loc[existing_row.index, ['timeFd', 'bound', 'accuracy']] = [timeFd_value, 2 * (norm_frobenius_A ** 2) / l_value, accuracy]
 else:
     # Aggiungi le nuove informazioni al DataFrame
-    new_row = pd.DataFrame({'l': [l_value], 'timeFd': [timeFd_value], 'bound': [2 * (norm_frobenius_B ** 2) / l_value], 'accuracy': [accuracy]})
+    new_row = pd.DataFrame({'l': [l_value], 'timeFd': [timeFd_value], 'bound': [2 * (norm_frobenius_A ** 2) / l_value], 'accuracy': [accuracy]})
     df_result = pd.concat([df_result, new_row], ignore_index=True)
 
 # Ordina il DataFrame in base alla colonna 'l'

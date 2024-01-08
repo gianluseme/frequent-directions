@@ -1,5 +1,12 @@
 import subprocess
 import time
+import sys
+
+if len(sys.argv) < 1:
+    print("Usage: python test.py <l_size>")
+    sys.exit(1)
+
+l_size = int(sys.argv[1])
 
 # Percorso del tuo programma C++
 percorso_programma_cpp = "./frequent_directions"
@@ -14,22 +21,35 @@ file_di_grandi_dimensioni = "largeMatrix1.csv"
 l_values = [10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000, 3000, 4000, 5000, 7500, 10000]
 
 # Funzione per eseguire il programma C++
+
+
 def esegui_programma(file_input, l, svd_option):
-    comando = [
-        percorso_programma_cpp,
-        "--input", file_input,
-        "-l", str(l),
-        "--svd", svd_option,
-        "--mode", "acc",
-        "--bench"
-    ]
+    if l_size == 1:
+        comando = [
+            percorso_programma_cpp,
+            "--input", file_input,
+            "-l", str(l),
+            "--svd", svd_option,
+            "--mode", "acc",
+            "--bench",
+            "--l_truesize"
+        ]
+    if l_size == 2:
+        comando = [
+            percorso_programma_cpp,
+            "--input", file_input,
+            "-l", str(l),
+            "--svd", svd_option,
+            "--mode", "acc",
+            "--bench"
+        ]
     subprocess.run(comando, check=True)
 
 # Funzione per eseguire il programma per tutti i file e valori di l
 def esegui_programma_per_tutti_i_file():
     start_time = time.time()  # Registra il tempo di inizio
     for svd_value in ["gesvd", "gesdd"]:
-        for file_input in [file_di_piccole_dimensioni, file_di_medie_dimensioni, file_di_grandi_dimensioni]:
+        for file_input in [file_di_piccole_dimensioni]:
             for l_value in l_values:
                 print(f"Esecuzione per l = {l_value} su {file_input}...")
                 esegui_programma(file_input, l_value, svd_value)

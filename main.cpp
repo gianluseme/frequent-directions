@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
     bool bench = false;
     bool bound = false;
     bool accur = false;
+    bool l_size = false; // usa 2l di default
 
     int timeFd;
 
@@ -55,7 +56,8 @@ int main(int argc, char* argv[]) {
             ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"))
             ("bench", "Abilia la modalità di benchmark")
             ("bound", "Calcola il bound dell'algoritmo (dato l)")
-            ("acctest", "Esegui il test di accuratezza (dato l)");
+            ("acctest", "Esegui il test di accuratezza (dato l)")
+            ("l_truesize", "Scegli se eseguire l'algoritmo usando 2l o l");
 
     try {
 
@@ -91,6 +93,9 @@ int main(int argc, char* argv[]) {
             std::cout << "Argomento non valido per --mode" << std::endl;
             return 1;
         }
+
+        if(result.count("l_truesize"))
+            l_size = true;
 
         if(result.count("bench"))
             bench = true;
@@ -150,20 +155,37 @@ int main(int argc, char* argv[]) {
 
     if(mode) {
 
-        // modalità ronly (effettua solo la riduzione della matrice
+        // modalità ronly (effettua solo la riduzione della matrice)
 
         auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
 
-        auto end_timeFd = std::chrono::high_resolution_clock::now();
+        if(!l_size) {
+            DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
 
-        timeFd = std::chrono::duration_cast<std::chrono::milliseconds >(end_timeFd - start_timeFd).count();
+            auto end_timeFd = std::chrono::high_resolution_clock::now();
 
-        if(svd)
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV);
-        else
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV);
+            timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
+
+            if (svd)
+                opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV);
+            else
+                opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV);
+        }
+        else {
+
+            DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
+
+            auto end_timeFd = std::chrono::high_resolution_clock::now();
+
+            timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
+
+            if (svd)
+                opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesvd/sketch_1_l" + lString + "_" + nomeFileCSV);
+            else
+                opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/gesdd/sketch_1_l" + lString + "_" + nomeFileCSV);
+
+        }
 
         // Registra il tempo di fine
         auto end_time = std::chrono::high_resolution_clock::now();
@@ -176,19 +198,21 @@ int main(int argc, char* argv[]) {
         // Stampa il tempo di esecuzione
         std::cout << "Tempo totale di esecuzione: " << duration.count() << " millisecondi" << std::endl;
 
-    } else {
+    } else { //modalità calcolo di accuratezza
 
         DynamicMatrix<double> matriceRidotta;
 
-        if(bench) {
+        if(bench) {   // ripete l'esecuzione dell'algoritmo 5 volte per ottenere una stima più accurata sul tempo di esecuzione
 
             std::vector<int> timesFd;
 
-            for(int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
 
                 auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-                matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+                if(!l_size)
+                    matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+                else matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
 
                 auto end_timeFd = std::chrono::high_resolution_clock::now();
 
@@ -208,7 +232,9 @@ int main(int argc, char* argv[]) {
 
             auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-            matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+            if(!l_size)
+                matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+            else matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
 
             auto end_timeFd = std::chrono::high_resolution_clock::now();
 
@@ -216,10 +242,14 @@ int main(int argc, char* argv[]) {
 
         }
 
+        std::filesystem::path filePath;
+
 
         if(svd) {
 
-            std::filesystem::path filePath = "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV;
+            if(!l_size)
+                filePath = "./results/gesvd/sketch_l" + lString + "_" + nomeFileCSV;
+            else filePath = "./results/gesvd/sketch_1_l" + lString + "_" + nomeFileCSV;
 
             // Verifica e crea le directory se non esistono
             if (!std::filesystem::exists(filePath.parent_path())) {
@@ -230,7 +260,10 @@ int main(int argc, char* argv[]) {
         }
         else {
 
-            std::filesystem::path filePath = "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV;
+            if(!l_size)
+                filePath = "./results/gesdd/sketch_l" + lString + "_" + nomeFileCSV;
+            else filePath = "./results/gesdd/sketch_1_l" + lString + "_" + nomeFileCSV;
+
 
             // Verifica e crea le directory se non esistono
             if (!std::filesystem::exists(filePath.parent_path())) {
@@ -242,10 +275,18 @@ int main(int argc, char* argv[]) {
 
         //const double accuracy = frequent_directions::accuracyTest(matrice, matriceRidotta);
 
+        std::string l_value;
 
         if(svd) {
 
-            std::filesystem::path filePath = "./results/gesvd/list/results_" + nomeFileCSV;
+            if(!l_size) {
+                filePath = "./results/gesvd/list/results_" + nomeFileCSV;
+                l_value = "2";
+            }
+            else {
+                filePath = "./results/gesvd/list/results_1_" + nomeFileCSV;
+                l_value = "1";
+            }
 
             // Verifica e crea le directory se non esistono
             if (!std::filesystem::exists(filePath.parent_path())) {
@@ -254,13 +295,20 @@ int main(int argc, char* argv[]) {
 
             //opencsv::appendCSV(l, timeFd, filePath);
 
-            std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " gesvd " + nomeFileCSV;
+            std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " gesvd " + nomeFileCSV + " " + l_value;
 
             system(command.c_str());
 
         } else {
 
-            std::filesystem::path filePath = "./results/gesdd/list/results_" + nomeFileCSV;
+            if(!l_size) {
+                filePath = "./results/gesdd/list/results_" + nomeFileCSV;
+                l_value = "2";
+            }
+            else {
+                filePath = "./results/gesdd/list/results_1_" + nomeFileCSV;
+                l_value = "1";
+            }
 
             // Verifica e crea le directory se non esistono
             if (!std::filesystem::exists(filePath.parent_path())) {
@@ -269,7 +317,7 @@ int main(int argc, char* argv[]) {
 
             //opencsv::appendCSV(l, timeFd, filePath);
 
-            std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " gesdd " + nomeFileCSV;
+            std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " gesdd " + nomeFileCSV + " " + l_value;
 
             system(command.c_str());
 
