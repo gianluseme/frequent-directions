@@ -17,11 +17,11 @@ file_di_medie_dimensioni = "mediumMatrix1.csv"
 file_di_grandi_dimensioni = "largeMatrix1.csv"
 
 # Definisci i valori di l da considerare
-l_values_3 = [10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
+l_values_3 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
 
-l_values_1 = [10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200]
+l_values_1 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
-l_values_2 = [10, 20, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000]
+l_values_2 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000]
 
 # Funzione per eseguire il programma C++
 
@@ -53,6 +53,7 @@ def esegui_programma_per_tutti_i_file():
     start_time = time.time()  # Registra il tempo di inizio
     for svd_value in ["gesvd", "gesdd"]:
         for file_input in [file_di_piccole_dimensioni, file_di_medie_dimensioni, file_di_grandi_dimensioni]:
+
             if file_input == 'smallMatrix1.csv':
                 for l_value in l_values_1:
                     print(f"Esecuzione per l = {l_value} su {file_input}...")
