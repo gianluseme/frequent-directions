@@ -46,19 +46,8 @@ public:
             bom[2] == static_cast<char>(0xBF)) {
             file.ignore(3); // Ignora i primi 3 byte
         }
-            //BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE)) ||
-                 (bom[0] == static_cast<char>(0xFE) && bom[1] == static_cast<char>(0xFF))) {
-            file.ignore(2); // Ignora i primi 2 byte
-        }
-            // BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE) &&
-                  bom[2] == static_cast<char>(0x00) && bom[3] == static_cast<char>(0x00)) ||
-                 (bom[0] == static_cast<char>(0x00) && bom[1] == static_cast<char>(0x00) &&
-                  bom[2] == static_cast<char>(0xFE) && bom[3] == static_cast<char>(0xFF))) {
-            file.ignore(4); // Ignora i primi 4 byte
-        } else
 
+        else
 
         if (!file.is_open()) {
             std::cerr << "Errore nell'apertura del file " << nomeFIle << ": " << strerror(errno) << std::endl;
@@ -123,18 +112,7 @@ public:
             file.ignore(3); // Ignora i primi 3 byte
         }
             //BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE)) ||
-                 (bom[0] == static_cast<char>(0xFE) && bom[1] == static_cast<char>(0xFF))) {
-            file.ignore(2); // Ignora i primi 2 byte
-        }
-            // BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE) &&
-                  bom[2] == static_cast<char>(0x00) && bom[3] == static_cast<char>(0x00)) ||
-                 (bom[0] == static_cast<char>(0x00) && bom[1] == static_cast<char>(0x00) &&
-                  bom[2] == static_cast<char>(0xFE) && bom[3] == static_cast<char>(0xFF))) {
-            file.ignore(4); // Ignora i primi 4 byte
-        } else
-
+        else
 
         if (!file.is_open()) {
             std::cerr << "Errore nell'apertura del file " << nomeFile << ": " << strerror(errno) << std::endl;
@@ -234,7 +212,6 @@ public:
             blaze::diagonal(diagS) = S;
 
             B = diagS * V;
-
             nextZeroRow = halfl;
 
         } else {
@@ -242,8 +219,11 @@ public:
             DynamicMatrix<double> diagS(S.size(), S.size(), 0.0);
             blaze::diagonal(diagS) = S;
 
+            // Sovrascrivi le prime S.size righe con il prodotto diagS*V
             submatrix(B, 0UL, 0UL, S.size(), B.columns()) = diagS * V;
-            submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) = submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) * 0.0;
+
+            // Imposta a zero il resto della matrice
+            submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) = 0.0;
 
             nextZeroRow = S.size();
 
@@ -271,6 +251,7 @@ public:
 
         int halfl = (l/2) - 1;
 
+
         if(S.size() >= l/2) {
 
             double delta = blaze::pow(S[halfl], 2);
@@ -281,14 +262,18 @@ public:
 
             submatrix(B, 0UL, 0UL, l / 2, B.columns()) = submatrix(tempMatrix, 0UL, 0UL, l / 2, tempMatrix.columns());
             submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) * 0.0;
-            nextZeroRow = l / 2;
+            nextZeroRow = halfl;
 
         } else {
 
             DynamicMatrix<double> diagS(S.size(), S.size(), 0.0);
             blaze::diagonal(diagS) = S;
+
+            // Sovrascrivi le prime S.size righe con il prodotto diagS*V
             submatrix(B, 0UL, 0UL, S.size(), B.columns()) = diagS * V;
-            submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) = submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) * 0.0;
+
+            // Imposta a zero il resto della matrice
+            submatrix(B, S.size(), 0UL, B.rows() - S.size(), B.columns()) = 0.0;
 
             nextZeroRow = S.size();
 
@@ -296,25 +281,6 @@ public:
 
     }
 
-    static int findFirstZeroRow(const DynamicMatrix<double>& B) {
-        for (size_t i = 0; i < B.rows(); ++i) {
-            // Verifica se la riga è completamente composta da zeri
-            if (blaze::isZero(row(B, i))) {
-                return static_cast<int>(i);  // Restituisce l'indice della prima riga con zeri
-            }
-        }
-        return -1;  // Se nessuna riga è composta solo da zeri
-    }
-
-
-    static double accuracyTest(DynamicMatrix<double> A, DynamicMatrix<double> B) {
-
-        DynamicMatrix<double> diff = (trans(A) * A) - (trans(B) * B);
-        const double accuracy = blaze::l2Norm(diff);
-        std::cout << "Accuracy: " << accuracy << std::endl;
-        return accuracy;
-
-    }
 
     static double boundCalculation(DynamicMatrix<double> A, int l) {
 
