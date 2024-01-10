@@ -47,8 +47,6 @@ public:
             file.ignore(3); // Ignora i primi 3 byte
         }
 
-        else
-
         if (!file.is_open()) {
             std::cerr << "Errore nell'apertura del file " << nomeFIle << ": " << strerror(errno) << std::endl;
             return {};
@@ -67,6 +65,7 @@ public:
         }
 
         DynamicMatrix<double> B(l, columnCount, 0.0);
+
         DynamicVector<double> row(columnCount);
 
         //tiene traccia dell'indice della riga nulla successiva di B
@@ -111,8 +110,6 @@ public:
             bom[2] == static_cast<char>(0xBF)) {
             file.ignore(3); // Ignora i primi 3 byte
         }
-            //BOM per codifica UTF-16 (little-endian o big-endian)
-        else
 
         if (!file.is_open()) {
             std::cerr << "Errore nell'apertura del file " << nomeFile << ": " << strerror(errno) << std::endl;
@@ -261,7 +258,7 @@ public:
             auto tempMatrix = diagS * V;
 
             submatrix(B, 0UL, 0UL, l / 2, B.columns()) = submatrix(tempMatrix, 0UL, 0UL, l / 2, tempMatrix.columns());
-            submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) * 0.0;
+            submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = 0.0;
             nextZeroRow = halfl;
 
         } else {

@@ -60,7 +60,7 @@ def esegui_programma_per_tutti_i_file():
                     esegui_programma(file_input, l_value, svd_value)
 
             if file_input == 'mediumMatrix1.csv':
-                for l_value in l_values_1:
+                for l_value in l_values_2:
                     print(f"Esecuzione per l = {l_value} su {file_input}...")
                     esegui_programma(file_input, l_value, svd_value)
 

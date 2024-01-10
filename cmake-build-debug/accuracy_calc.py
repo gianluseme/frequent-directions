@@ -77,6 +77,8 @@ if accmode == '1': # modalità scrittura su file
     # Salva il DataFrame come file CSV
     df_result.to_csv(filePath, index=False, header=True)
 
+    print('Accuracy: ', accuracy)
+
 else:
     if accmode == '2': # modalità stampa su terminale
 
