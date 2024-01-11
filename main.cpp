@@ -158,34 +158,28 @@ int main(int argc, char* argv[]) {
 
         } else
 
-    if(mode) {
+    if(mode) {       // modalità ronly (effettua solo la riduzione della matrice)
 
-        // modalità ronly (effettua solo la riduzione della matrice)
+        std::filesystem::path filePath;
+
+        if(!l_size)
+            filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV;
+        else filePath = "./results/"+svd_value+"/sketch_1_l" + lString + "_" + nomeFileCSV;
+
+        // Verifica e crea le directory se non esistono
+        if (!std::filesystem::exists(filePath.parent_path())) {
+            std::filesystem::create_directories(filePath.parent_path());
+        }
 
         auto start_timeFd = std::chrono::high_resolution_clock::now();
 
+        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
 
-        if(!l_size) {
-            DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+        auto end_timeFd = std::chrono::high_resolution_clock::now();
 
-            auto end_timeFd = std::chrono::high_resolution_clock::now();
+        timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
 
-            timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
-
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV);
-
-        }
-        else {
-
-            DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
-
-            auto end_timeFd = std::chrono::high_resolution_clock::now();
-
-            timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
-
-            opencsv::scriviMatriceSuCSV(matriceRidotta, "./results/"+svd_value+"/sketch_1_l" + lString + "_" + nomeFileCSV);
-
-        }
+        opencsv::scriviMatriceSuCSV(matriceRidotta, filePath);
 
         // Registra il tempo di fine
         auto end_time = std::chrono::high_resolution_clock::now();
@@ -276,7 +270,7 @@ int main(int argc, char* argv[]) {
 
         //opencsv::appendCSV(l, timeFd, filePath);
 
-        std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " gesvd " + nomeFileCSV + " " + l_value + " 1";
+        std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " " + svd_value + " " + nomeFileCSV + " " + l_value + " 1";
 
         system(command.c_str());
 
