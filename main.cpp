@@ -162,6 +162,8 @@ int main(int argc, char* argv[]) {
 
         std::filesystem::path filePath;
 
+        DynamicMatrix<double> matriceRidotta;
+
         if(!l_size)
             filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV;
         else filePath = "./results/"+svd_value+"/sketch_1_l" + lString + "_" + nomeFileCSV;
@@ -173,7 +175,9 @@ int main(int argc, char* argv[]) {
 
         auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-        DynamicMatrix<double> matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
+        if(!l_size)
+            matriceRidotta = frequent_directions::frequentDirections(2 * l, nomeFileCSV, svd, l_size);
+        else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
 
         auto end_timeFd = std::chrono::high_resolution_clock::now();
 
@@ -205,8 +209,8 @@ int main(int argc, char* argv[]) {
                 auto start_timeFd = std::chrono::high_resolution_clock::now();
 
                 if(!l_size)
-                    matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
-                else matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
+                    matriceRidotta = frequent_directions::frequentDirections(2*l, nomeFileCSV, svd, l_size);
+                else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
 
                 auto end_timeFd = std::chrono::high_resolution_clock::now();
 
@@ -227,8 +231,8 @@ int main(int argc, char* argv[]) {
             auto start_timeFd = std::chrono::high_resolution_clock::now();
 
             if(!l_size)
-                matriceRidotta = frequent_directions::frequentDirectionsStream(l, nomeFileCSV, svd);
-            else matriceRidotta = frequent_directions::frequentDirections1(l, nomeFileCSV, svd);
+                matriceRidotta = frequent_directions::frequentDirections(2*l, nomeFileCSV, svd, l_size);
+            else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
 
             auto end_timeFd = std::chrono::high_resolution_clock::now();
 

@@ -12,34 +12,12 @@
 #include <fstream>
 #include <sstream>
 #include <blaze/Math.h>
-#include <algorithm>
 #include <regex>
 
 
 using blaze::DynamicMatrix;
 
 class opencsv {
-
-    struct CSVRow {
-        int l;
-        int timeFd;
-
-        // Operatori per confronto e ordinamento
-        bool operator<(const CSVRow& other) const {
-            return l < other.l;
-        }
-
-        // Operatore di uguaglianza per cercare una riga con lo stesso valore di l
-        bool operator==(int value) const {
-            return l == value;
-        }
-    };
-
-    struct CSVString {
-        int l;
-        std::string timeFd;
-    };
-
 
 public:
 
@@ -78,19 +56,6 @@ public:
             bom[2] == static_cast<char>(0xBF)) {
             file.ignore(3); // Ignora i primi 3 byte
         }
-            //BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE)) ||
-                 (bom[0] == static_cast<char>(0xFE) && bom[1] == static_cast<char>(0xFF))) {
-            file.ignore(2); // Ignora i primi 2 byte
-        }
-            // BOM per codifica UTF-16 (little-endian o big-endian)
-        else if ((bom[0] == static_cast<char>(0xFF) && bom[1] == static_cast<char>(0xFE) &&
-                  bom[2] == static_cast<char>(0x00) && bom[3] == static_cast<char>(0x00)) ||
-                 (bom[0] == static_cast<char>(0x00) && bom[1] == static_cast<char>(0x00) &&
-                  bom[2] == static_cast<char>(0xFE) && bom[3] == static_cast<char>(0xFF))) {
-            file.ignore(4); // Ignora i primi 4 byte
-        }
-
 
         if (!file.is_open()) {
             std::cerr << "Errore nell'apertura del file " << nomeFile << ": " << strerror(errno) << std::endl;
@@ -142,9 +107,14 @@ public:
         int righe = dati.size();
         int colonne = righe > 0 ? dati[0].size() : 0;
 
-        DynamicMatrix<double> matrice = blaze::generate(righe, colonne, [&dati](size_t i, size_t j) {
-            return dati[i][j];
-        });
+        blaze::DynamicMatrix<double> matrice(righe, colonne);
+
+        for (size_t i = 0; i < righe; ++i) {
+            for (size_t j = 0; j < colonne; ++j) {
+                matrice(i, j) = dati[i][j];
+            }
+        }
+
 
         return matrice;
 
@@ -180,55 +150,6 @@ public:
 
         file.close();
     }
-
-    static void appendCSV(int l, int timeFd, const std::string& nomeFile) {
-        // Vettore per contenere le righe del file CSV
-        std::vector<CSVRow> rows;
-
-        // Leggi il contenuto attuale del file
-        std::ifstream inputFile(nomeFile);
-
-        CSVRow row;
-
-        for (CSVString i; (inputFile >> i.l).ignore(std::numeric_limits<std::streamsize>::max(), ',') &&
-                       std::getline(inputFile, i.timeFd);) {
-
-            // Converti le stringhe lette in interi e double
-            row.l = i.l;
-            row.timeFd = std::stoi(i.timeFd);
-
-            rows.push_back(row);
-        }
-
-        inputFile.close();
-
-        // Cerca una riga con lo stesso valore di l
-        auto it = std::find_if(rows.begin(), rows.end(), [l](const CSVRow& existingRow) {
-            return existingRow.l == l;
-        });
-
-        // Se trovi una riga con lo stesso valore di l, sostituisci i dati
-        if (it != rows.end()) {
-            it->timeFd = timeFd;
-        } else {
-            // Altrimenti, aggiungi una nuova riga
-            rows.push_back({l, timeFd});
-        }
-
-        // Ordina le righe in base a l
-        std::sort(rows.begin(), rows.end());
-
-        // Apri il file in modalità out
-        std::ofstream outputFile(nomeFile, std::ios::out);
-
-        // Scrivi le righe ordinate nel file
-        for (const auto& updatedRow : rows) {
-            outputFile << updatedRow.l << ',' << updatedRow.timeFd << '\n';
-        }
-
-        outputFile.close();
-    }
-
 
 };
 
