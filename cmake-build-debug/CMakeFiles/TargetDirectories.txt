@@ -1,3 +1,0 @@
-/home/semeg/frequent directions/cmake-build-debug/CMakeFiles/frequent_directions.dir
-/home/semeg/frequent directions/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/semeg/frequent directions/cmake-build-debug/CMakeFiles/rebuild_cache.dir
