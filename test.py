@@ -17,7 +17,7 @@ file_di_medie_dimensioni = "mediumMatrix1.csv"
 file_di_grandi_dimensioni = "largeMatrix1.csv"
 
 # Definisci i valori di l da considerare
-l_values_3 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
+l_values_3 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 1200, 1400, 1600, 1800, 2000]
 
 l_values_1 = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
