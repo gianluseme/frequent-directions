@@ -15,9 +15,7 @@ make
 
 cp ../accuracy_calc.py .
 cp ../test.py .
-cp ../smallMatrix.csv .
+cp ../trafficNew.csv .
 
 # Torna alla directory originale
 cd ..
-
-
