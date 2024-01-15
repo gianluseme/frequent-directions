@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
     int l;
     std::string nomeFileCSV;
     bool svd;
-    std::string svd_value;
+    std::string svd_value = "gesdd";
     bool mode;
     bool bench = false;
     bool bound = false;
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
             ("h,help", "Mostra l'aiuto")
             ("i,input", "File di input (.csv)", cxxopts::value<std::string>())
             ("l", "N. righe della matrice ridotta", cxxopts::value<int>())
-            ("svd", "Scelta tra gesvd e gesdd", cxxopts::value<std::string>()->default_value("gesvd"))
+            ("svd", "Scelta tra gesvd e gesdd", cxxopts::value<std::string>()->default_value("gesdd"))
             ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"))
             ("bench", "Abilia la modalità di benchmark")
             ("bound", "Calcola il bound dell'algoritmo (dato l)")
