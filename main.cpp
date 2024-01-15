@@ -17,7 +17,6 @@
 #include <cstdlib>
 
 
-
 using blaze::DynamicMatrix;
 using blaze::DynamicVector;
 using blaze::rowMajor;
@@ -29,7 +28,8 @@ using blaze::gesdd;
 int main(int argc, char* argv[]) {
 
     // Argomenti: file di input, l (numero di righe della matrice ridotta),
-    // parametro per scegliere tra la funzione gesvd e gesdd (default gesvd), modalità di funzionamento (solo riduzione/calcolo accuratezza, default solo riduzione)
+    // parametro per scegliere tra la funzione gesvd e gesdd (default gesdd), modalità di funzionamento (solo riduzione/calcolo accuratezza, default solo riduzione)
+    // parametro l_truesize per scegliere se usare il numero di righe l oppure se lavorare con 2l, acctest per effettuare test di accuratezza, bound per calcolare il bound teorico
 
     // Registra il tempo di inizio
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
     int l;
     std::string nomeFileCSV;
     bool svd;
-    std::string svd_value = "gesdd";
+    std::string svd_value;
     bool mode;
     bool bench = false;
     bool bound = false;

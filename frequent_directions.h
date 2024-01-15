@@ -11,6 +11,7 @@
 #include <vector>
 #include <regex>
 #include <string>
+#include <cstring>
 #include <blaze/Blaze.h>
 #include "opencsv.h"
 
