@@ -11,15 +11,22 @@ def plot_results(file_path, svd_options):
         df_1 = pd.read_csv(f'./results/{svd_option}/list/results_1_{file_path}')
         df_2 = pd.read_csv(f'./results/{svd_option}/list/results_{file_path}')
 
-        # Inizializza i dizionari direttamente dai DataFrame
-        time_data = {'l': df_1['l'].tolist(),
-                     'timeFd (l)': df_1['timeFd'].tolist(),
-                     'timeFd (2l)': df_2['timeFd'].tolist()}
+        # Trova l'intersezione dei valori di l
+        common_l_values = set(df_1['l']).intersection(df_2['l'])
 
-        bound_accuracy_data = {'l': df_1['l'].tolist(),
-                               'bound': df_1['bound'].tolist(),
-                               'accuracy (l)': df_1['accuracy'].tolist(),
-                               'accuracy (2l)': df_2['accuracy'].tolist()}
+        # Filtra i DataFrame solo con valori di l comuni
+        df_1_common = df_1[df_1['l'].isin(common_l_values)]
+        df_2_common = df_2[df_2['l'].isin(common_l_values)]
+
+        # Inizializza i dizionari direttamente dai DataFrame filtrati
+        time_data = {'l': df_1_common['l'].tolist(),
+                     'timeFd (l)': df_1_common['timeFd'].tolist(),
+                     'timeFd (2l)': df_2_common['timeFd'].tolist()}
+
+        bound_accuracy_data = {'l': df_1_common['l'].tolist(),
+                               'bound': df_1_common['bound'].tolist(),
+                               'accuracy (l)': df_1_common['accuracy'].tolist(),
+                               'accuracy (2l)': df_2_common['accuracy'].tolist()}
 
         # Crea la directory se non esiste
         save_dir = f'./results/{svd_option}/plot/'

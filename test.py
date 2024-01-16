@@ -1,9 +1,10 @@
 import subprocess
+import csv
 import time
 import sys
-import pandas as pd
 
-if len(sys.argv) < 2:
+
+if len(sys.argv) < 3 or len(sys.argv) > 5:
     print("Usage: python test.py <l_size> [<file1> [<file2> [<file3>]]]")
     sys.exit(1)
 
@@ -14,6 +15,7 @@ percorso_programma_cpp = "./frequent_directions"
 
 # Lista dei file dai parametri della linea di comando
 file_paths = sys.argv[2:]
+
 
 # Funzione per ottenere dinamicamente la lista l_values in base al numero di colonne del file CSV
 def get_l_values(num_columns):
@@ -42,6 +44,16 @@ def get_l_values(num_columns):
             base_list.append(num_columns)
         return base_list
 
+
+# funzione per leggere il numero di colonne di un file csv
+def get_num_columns(file_path):
+    with open(file_path, 'r', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        first_row = next(reader)
+        num_columns = len(first_row)
+    return num_columns
+
+
 # Funzione per eseguire il programma C++
 def esegui_programma(file_input, l, svd_option):
     comando = [
@@ -59,20 +71,21 @@ def esegui_programma(file_input, l, svd_option):
 # Funzione per eseguire il programma per tutti i file e valori di l
 def esegui_programma_per_tutti_i_file():
     start_time = time.time()  # Registra il tempo di inizio
-    for svd_value in ["gesvd", "gesdd"]:
-        for file_input in file_paths:
+    for file_input in file_paths:
+        for svd_value in ["gesvd", "gesdd"]:
             if file_input:
                 try:
-                    df = pd.read_csv(file_input)
-                    num_columns = len(df.columns)
+                    num_columns = get_num_columns(file_input)
                     l_values = get_l_values(num_columns)
-                    df = None  # Elimina il DataFrame per liberare memoria
                     for l_value in l_values:
-                        print(f"Esecuzione per l = {l_value} su {file_input}...")
+                        print(f"Esecuzione per l = {l_value} su {file_input}, SVD: ({svd_value})...")
                         esegui_programma(file_input, l_value, svd_value)
                 except Exception as e:
                     print(f"Errore nella lettura del file {file_input}: {e}")
                     sys.exit(1)
+
+        # lancia lo script python per generare i grafici per il file considerato
+        subprocess.run(["python3", "plot.py", file_input])
 
     end_time = time.time()  # Registra il tempo di fine
     elapsed_time = end_time - start_time
