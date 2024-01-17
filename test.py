@@ -66,8 +66,9 @@ def esegui_programma_per_tutti_i_file():
                     num_columns = get_num_columns(file_input)
                     l_values = get_l_values(num_columns)
                     for l_value in l_values:
-                        print(f"Esecuzione per l = {l_value} su {file_input}, SVD: ({svd_value})...")
+                        print(f"Esecuzione per l = {l_value} (2*l) su {file_input}, SVD: ({svd_value})...")
                         esegui_programma(file_input, l_value, svd_value, 0)
+                        print(f"Esecuzione per l = {l_value} (dimensione normale di l) su {file_input}, SVD: ({svd_value})...")
                         esegui_programma(file_input, l_value, svd_value, 1)
                 except Exception as e:
                     print(f"Errore nella lettura del file {file_input}: {e}")
