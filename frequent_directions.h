@@ -163,12 +163,18 @@ public:
         // quest'operazione riduce i primi l/2 valori singolari, annullando i successivi
         S = blaze::sqrt(blaze::max(S * S - delta, 0.0));
 
-        // matrice avente sulla diagonale principale i valori singolari in ordine decrescente
-        DynamicMatrix<double> diagS(B.rows(), S.size(), 0.0);
+        // matrice  diagonale contentente i valori singolari in ordine decrescente
+        DynamicMatrix<double> diagS(S.size(), S.size(), 0.0);
         blaze::diagonal(diagS) = S;
 
-        // la rotazione di B viene ultimata con il prodotto diagS*V
-        B = diagS*V;
+        /*  la rotazione di B viene ultimata con il prodotto diagS*V
+            le prime l/2 righe del prodotto diagS*V vengono inserite nelle prime l/2 righe di B
+            le righe successive sono impostate a zero
+            quest'operazione è equivalente a calcolare B = diagS*V (con diagS avente numero di righe pari a quello di B),
+            ma è più efficiente, in quanto coinvolge nel prodotto una matrice diagonale
+         */
+        submatrix(B, 0UL, 0UL, l / 2, B.columns()) = submatrix(diagS*V, 0UL, 0UL, l / 2, (diagS*V).columns());
+        submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = 0.0;
 
         // dopo il prodotto B ha le ultime l/2 righe nulle
         nextZeroRow = halfl;
