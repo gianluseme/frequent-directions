@@ -4,45 +4,33 @@ import time
 import sys
 
 
-if len(sys.argv) < 3 or len(sys.argv) > 5:
-    print("Usage: python test.py <l_size> [<file1> [<file2> [<file3>]]]")
+# Verifica il numero corretto di argomenti dalla riga di comando
+if len(sys.argv) < 2 or len(sys.argv) > 4:
+    print("Usage: python test.py [<file1> [<file2> [<file3>]]]")
     sys.exit(1)
 
-l_size = int(sys.argv[1])
-
-# Percorso del tuo programma C++
 percorso_programma_cpp = "./frequent_directions"
 
 # Lista dei file dai parametri della linea di comando
-file_paths = sys.argv[2:]
-
+file_paths = sys.argv[1:]
 
 # Funzione per ottenere dinamicamente la lista l_values in base al numero di colonne del file CSV
 def get_l_values(num_columns):
+    # divisione l'intervallo dei valori di l in base al numero di colonne
     if num_columns <= 100:
         base_list = [i for i in range(10, num_columns + 1, 10)]
-        remainder = num_columns % 10
-        if remainder > 0:
-            base_list.append(num_columns)
-        return base_list
     elif num_columns <= 1000:
         base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, num_columns + 1, 100)]
-        remainder = num_columns % 100
-        if remainder > 0:
-            base_list.append(num_columns)
-        return base_list
     elif num_columns <= 2000:
         base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, 1001, 100)] + [i for i in range(1200, num_columns + 1, 200)]
-        remainder = num_columns % 100
-        if remainder > 0:
-            base_list.append(num_columns)
-        return base_list
     else:
         base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, 1001, 100)] + [i for i in range(1200, 2001, 200)] + [i for i in range(2200, num_columns + 1, 200)]
-        remainder = num_columns % 100
-        if remainder > 0:
-            base_list.append(num_columns)
-        return base_list
+
+    # Aggiungi l'eventuale resto al valore massimo di num_columns
+    if (num_columns % 10) > 0:
+        base_list.append(num_columns)
+
+    return base_list
 
 
 # funzione per leggere il numero di colonne di un file csv
@@ -55,7 +43,7 @@ def get_num_columns(file_path):
 
 
 # Funzione per eseguire il programma C++
-def esegui_programma(file_input, l, svd_option):
+def esegui_programma(file_input, l, svd_option, l_size):
     comando = [
         percorso_programma_cpp,
         "--input", file_input,
@@ -68,7 +56,7 @@ def esegui_programma(file_input, l, svd_option):
         comando.append("--l_truesize")
     subprocess.run(comando, check=True)
 
-# Funzione per eseguire il programma per tutti i file e valori di l
+# Funzione per eseguire il programma per tutti i file, i valori di l e modalità di esecuzione
 def esegui_programma_per_tutti_i_file():
     start_time = time.time()  # Registra il tempo di inizio
     for file_input in file_paths:
@@ -79,19 +67,19 @@ def esegui_programma_per_tutti_i_file():
                     l_values = get_l_values(num_columns)
                     for l_value in l_values:
                         print(f"Esecuzione per l = {l_value} su {file_input}, SVD: ({svd_value})...")
-                        esegui_programma(file_input, l_value, svd_value)
+                        esegui_programma(file_input, l_value, svd_value, 0)
+                        esegui_programma(file_input, l_value, svd_value, 1)
                 except Exception as e:
                     print(f"Errore nella lettura del file {file_input}: {e}")
                     sys.exit(1)
 
-        # lancia lo script python per generare i grafici per il file considerato
+        # esecuzione dello script python per generare i grafici per il file considerato
         subprocess.run(["python3", "plot.py", file_input])
 
     end_time = time.time()  # Registra il tempo di fine
     elapsed_time = end_time - start_time
     print(f"Tempo totale di esecuzione: {elapsed_time:.2f} secondi")
 
-# Esegui il programma per tutti i file e valori di l
 esegui_programma_per_tutti_i_file()
 
 print("Esecuzioni completate.")

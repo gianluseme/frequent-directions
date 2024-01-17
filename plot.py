@@ -8,6 +8,7 @@ import sys
 def plot_results(file_path, svd_options):
     for svd_option in svd_options:
 
+        # lettura dei dati dai file CSV risultanti dalle esecuzioni con diversi valori di l
         df_1 = pd.read_csv(f'./results/{svd_option}/list/results_1_{file_path}')
         df_2 = pd.read_csv(f'./results/{svd_option}/list/results_{file_path}')
 
@@ -28,7 +29,7 @@ def plot_results(file_path, svd_options):
                                'accuracy (l)': df_1_common['accuracy'].tolist(),
                                'accuracy (2l)': df_2_common['accuracy'].tolist()}
 
-        # Crea la directory se non esiste
+        # Crea la directory per le immaigini dei grafici, se non esiste
         save_dir = f'./results/{svd_option}/plot/'
         os.makedirs(save_dir, exist_ok=True)
 
@@ -64,12 +65,14 @@ def plot_results(file_path, svd_options):
         # Visualizza tutti i valori di l sull'asse x come testo senza tener conto dei reali valori numerici
         plt.xticks(range(len(bound_accuracy_data['l'])), map(str, bound_accuracy_data['l']), rotation=45)
 
+        # Personalizza i tick dell'asse y per la scala logaritmica
         plt.yticks([1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000], ['1000', '5000', '10000', '20000', '50000', '100000', '200000', '500000', '1000000'])
 
         plt.legend()
         plt.savefig(f'{save_dir}bound_accuracy_{file_path}.png')
 
 
+# verifica che ci sia esattamente 1 argomento dalla riga di comando
 if len(sys.argv) != 2:
     print("Usage: python script.py <file_name.csv>")
     sys.exit(1)

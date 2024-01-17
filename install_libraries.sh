@@ -1,26 +1,53 @@
 #!/bin/bash
 
-# Aggiorna l'elenco dei pacchetti
+
+# Funzione per controllare l'esistenza di un comando
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Verifica l'installazione di liblapack-dev
+if ! command_exists dpkg; then
+  echo "Il comando dpkg non è disponibile. Assicurati di essere su un sistema con dpkg installato."
+  exit 1
+fi
+
+# Aggiornamento dell'elenco dei pacchetti
 sudo apt update
 
-# Installa LAPACK
-sudo apt-get install liblapack-dev -y
+# Installazione di LAPACK (se non è già installata)
+if dpkg -l | grep -q liblapack-dev; then
+  echo "liblapack-dev è già installato."
+else
+  sudo apt-get install liblapack-dev -y
+fi
 
-# Installa OpenBLAS
-sudo apt-get install libopenblas-dev -y
+# Installazione di OpenBLAS (se non è già installata)
+if dpkg -l | grep -q libopenblas-dev; then
+  echo "libopenblas-dev è già installato."
+else
+  sudo apt-get install libopenblas-dev -y
+fi
 
-# Installa Blaze (C++ Template Library for High-Performance Linear Algebra)
-# Puoi scaricare Blaze dal repository GitHub e compilare il codice sorgente
-git clone https://github.com/parsa/blaze.git
-cd blaze
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local/
-sudo make install
-cd ..
+# Installazione di Blaze (se non è già installata)
+if [ -f "/usr/local/include/blaze/Blaze.h" ]; then
+    echo "Blaze è già installato."
+else
+  git clone https://github.com/parsa/blaze.git
+  cd blaze
+  cmake -DCMAKE_INSTALL_PREFIX=/usr/local/
+  sudo make install
+  cd ..
+fi
 
-# Installa cxxopts (Lightweight C++ command line option parser)
-git clone https://github.com/jarro2783/cxxopts.git
-cd cxxopts
-sudo cp  include/cxxopts.hpp /usr/local/include
-cd ..
+# Installazione di cxxopts (se non è già installata)
+if [ -f "/usr/local/include/cxxopts.hpp" ] || [ -f "/usr/include/cxxopts.hpp" ]; then
+    echo "La libreria cxxopts è già installata."
+else
+  git clone https://github.com/jarro2783/cxxopts.git
+  cd cxxopts
+  sudo cp  include/cxxopts.hpp /usr/local/include
+  cd ..
+fi
 
 echo "Installazione completata."

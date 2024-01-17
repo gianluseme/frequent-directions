@@ -12,10 +12,10 @@ cmake ..
 make
 
 # Copia dei file nella directory build
-
 cp ../accuracy_calc.py .
 cp ../test.py .
 cp ../smallMatrix.csv .
+cp ../plot.py .
 
 # Torna alla directory originale
 cd ..
