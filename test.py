@@ -18,13 +18,13 @@ file_paths = sys.argv[1:]
 def get_l_values(num_columns):
     # divisione l'intervallo dei valori di l in base al numero di colonne
     if num_columns <= 100:
-        base_list = [i for i in range(10, num_columns + 1, 10)]
+        base_list = [i for i in range(10, 2*num_columns + 1, 10)]
     elif num_columns <= 1000:
-        base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, num_columns + 1, 100)]
+        base_list = [i for i in range(10, 101, 10)] + [i for i in range(200, 2*num_columns + 1, 100)]
     elif num_columns <= 2000:
-        base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, 1001, 100)] + [i for i in range(1200, num_columns + 1, 200)]
+        base_list = [i for i in range(10, 101, 10)] + [i for i in range(200, 1001, 100)] + [i for i in range(1100, 2001, 100)] + [i for i in range(2200, 2*num_columns + 1, 200)]
     else:
-        base_list = [i for i in range(10, 101, 10)] + [i for i in range(100, 1001, 100)] + [i for i in range(1200, 2001, 200)] + [i for i in range(2200, num_columns + 1, 200)]
+        base_list = [i for i in range(10, 101, 10)] + [i for i in range(200, 1001, 100)] + [i for i in range(1100, 2001, 100)] + [i for i in range(2200, 2*num_columns + 1, 200)]
 
     # Aggiungi l'eventuale resto al valore massimo di num_columns
     if (num_columns % 10) > 0:
@@ -43,7 +43,7 @@ def get_num_columns(file_path):
 
 
 # Funzione per eseguire il programma C++
-def esegui_programma(file_input, l, svd_option, l_size):
+def esegui_programma(file_input, l, svd_option):
     comando = [
         percorso_programma_cpp,
         "--input", file_input,
@@ -52,8 +52,6 @@ def esegui_programma(file_input, l, svd_option, l_size):
         "--mode", "acc",
         "--bench"
     ]
-    if l_size == 1:
-        comando.append("--l_truesize")
     subprocess.run(comando, check=True)
 
 # Funzione per eseguire il programma per tutti i file, i valori di l e modalità di esecuzione
@@ -66,10 +64,8 @@ def esegui_programma_per_tutti_i_file():
                     num_columns = get_num_columns(file_input)
                     l_values = get_l_values(num_columns)
                     for l_value in l_values:
-                        print(f"Esecuzione per l = {l_value} (2*l) su {file_input}, SVD: ({svd_value})...")
-                        esegui_programma(file_input, l_value, svd_value, 0)
-                        print(f"Esecuzione per l = {l_value} (dimensione normale di l) su {file_input}, SVD: ({svd_value})...")
-                        esegui_programma(file_input, l_value, svd_value, 1)
+                        print(f"Esecuzione per l = {l_value} su {file_input}, SVD: ({svd_value})...")
+                        esegui_programma(file_input, l_value, svd_value)
                 except Exception as e:
                     print(f"Errore nella lettura del file {file_input}: {e}")
                     sys.exit(1)

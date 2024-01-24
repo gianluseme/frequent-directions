@@ -24,7 +24,7 @@ class frequent_directions {
 public:
 
     // funzione che implementa l'algoritmo Frequent Directions
-    static DynamicMatrix<double> frequentDirections(int l, const std::string& nomeFile, const bool svd, const bool l_value) {
+    static DynamicMatrix<double> frequentDirections(int l, const std::string &nomeFile, const bool svd) {
 
         // apertura del file specificato dalla variabile 'nomeFile' in modalità binaria
         std::ifstream file(nomeFile, std::ios::binary);
@@ -66,28 +66,24 @@ public:
             ++columnCount;
         }
 
-        // verifica che il valore vero di l sia <= del numero di colonne della matrice di input
-        // se l_value è true, l è rimasto invariato (sto usando il vero valore di l)
-        // se l_value è false, l è doppio rispetto al suo valore originale
-        if(l_value) { // l
-            if (l > columnCount) {
-                std::cerr << "l non deve essere più grande del numero di colonne della matrice di input (n. colonne: " << columnCount << ")." << std::endl;
-                exit(1);
-            }
-        } else if(l/2 > columnCount) {  // 2*l
-            std::cerr << "l non deve essere più grande del numero di colonne della matrice di input(n. colonne: " << columnCount << ")." << std::endl;
+        // verifica che il valore vero di l sia <= del doppio del numero di colonne della matrice di input
+        if (l > 2 * columnCount) {
+            std::cerr
+                    << "l non deve essere più grande del doppio del numero di colonne della matrice di input (n. colonne: "
+                    << columnCount << ")." << std::endl;
+            file.close();
             exit(1);
         }
 
+
         // dichiarazione della matrice sketch B inizializzata a zero
-        // l righe (2*l se l'algoritmo viene eseguito nella modalità con doppio valore di l), numero di colonne pari a quello della matrice originale
         DynamicMatrix<double> B(l, columnCount, 0.0);
 
         // dichiarazione del vettore riga che verrà estratto iterativamente dalla matrice di input
         DynamicVector<double> row(columnCount);
 
         //tiene traccia dell'indice della riga nulla successiva di B
-        int nextZeroRow = 0;
+        int nullRowIndex = 0;
 
         // Leggi una riga alla volta
         while (std::getline(file, line)) {
@@ -102,39 +98,27 @@ public:
                 row[j] = std::stod(value);
             }
 
-            // Passa la riga alla funzione appendRow
-            appendRow(l, row, B, nextZeroRow, svd);
+            // se non ci sono più righe vuote, effettua l'operazione di rotazione della matrice con rotateB
+            if (nullRowIndex >= l)
+                rotateB(l, B, nullRowIndex, svd);
+
+            // aggiungi la riga estratta da A in B
+            for (size_t j = 0; j < B.columns(); ++j) {
+                B(nullRowIndex, j) = row[j];
+            }
+
+            // aumenta di 1 l'indice della riga nulla successiva
+            nullRowIndex += 1;
 
         }
-
-        // se l'algoritmo è stato eseguito senza l'opzione --l_truesize,
-        // è stato usato un numero doppio di righe per la matrice sketch, quindi viene dimezzato il numero di righe prima di effettuare il return
-        if(!l_value)
-            B = submatrix(B,0UL, 0UL, l/2, B.columns());  //restituisco le prime l righe della matrice
 
         return B;
 
     }
 
 
-    static void appendRow(int l, const DynamicVector<double> &Ai, DynamicMatrix<double> &B, int& nextZeroRow, const bool svd) {
-
-        // se non ci sono più righe vuote, effettua l'operazione di rotazione della matrice con rotateB
-        if(nextZeroRow >= l)
-            rotateB(l, B, nextZeroRow, svd);
-
-        // aggiungi una nuova riga della matrice di input
-        for (size_t j = 0; j < B.columns(); ++j) {
-            B(nextZeroRow, j) = Ai[j];
-        }
-
-        // aumenta di 1 l'indice della riga nulla successiva
-        nextZeroRow += 1;
-
-    }
-
-
-    static void rotateB(int l, DynamicMatrix<double> &B, int& nextZeroRow, const bool svd) {
+    // Funzione per la rotazione della matrice sketch
+    static void rotateB(int l, DynamicMatrix<double> &B, int& nullRowIndex, const bool svd) {
 
         // Allocazione per i valori singolari
         DynamicVector<double> S;
@@ -177,7 +161,7 @@ public:
         submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = 0.0;
 
         // dopo il prodotto B ha le ultime l/2 righe nulle
-        nextZeroRow = halfl;
+        nullRowIndex = halfl;
 
     }
 

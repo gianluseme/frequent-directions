@@ -13,10 +13,20 @@
 #include <cxxopts.hpp>
 #include <filesystem>
 #include <cstdlib>
+#include <sys/resource.h>
+
 
 
 using blaze::DynamicMatrix;
 
+
+// funzione che utilizza la system call 'getrusage' per ottenere l'utilizzo della memoria
+long get_mem_usage() {
+    struct rusage myusage;
+
+    getrusage(RUSAGE_SELF, &myusage);
+    return myusage.ru_maxrss;
+}
 
 int main(int argc, char* argv[]) {
 
@@ -26,6 +36,9 @@ int main(int argc, char* argv[]) {
 
     // Registra il tempo di inizio dell'esecuzione del programma
     auto start_time = std::chrono::high_resolution_clock::now();
+
+    // riferimento iniziale sull'utilizzo della memoria
+    long baseline = get_mem_usage();
 
     // numero di righe della matrice sketch
     int l;
@@ -48,11 +61,11 @@ int main(int argc, char* argv[]) {
     // variabile che abilita il calcolo dell'accuratezza
     bool accur = false;
 
-    // variabile per determinare il funzionamento in modalità l o 2l (default 2l)
-    bool l_size = false;
-
     // tempo di esecuzione di Frequent Directions
     int timeFd;
+
+    // utilizzo di memoria del programma
+    long memoryUtil;
 
     cxxopts::Options options("Frequent Directions", "Descrizione del programma");
 
@@ -64,8 +77,7 @@ int main(int argc, char* argv[]) {
             ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"))
             ("bench", "Abilita la modalità di benchmark (esegue più volte l'algoritmo)")
             ("bound", "Calcola il bound dell'algoritmo (dato l)")
-            ("acctest", "Esegui il test di accuratezza (dato l)")
-            ("l_truesize", "Scegli se eseguire l'algoritmo usando il numero originale di righe per la matrice sketch");
+            ("acctest", "Esegui il test di accuratezza (dato l)");
 
     try {
 
@@ -113,9 +125,6 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        if(result.count("l_truesize"))
-            l_size = true;
-
         if(result.count("bench"))
             bench = true;
 
@@ -129,6 +138,12 @@ int main(int argc, char* argv[]) {
     } catch (const cxxopts::exceptions::parsing& e) {
         std::cerr << "Errore nell'analisi degli argomenti: " << e.what() << std::endl;
         return 1;
+    }
+
+    // verifica che l è divisibile per 2
+    if(l % 2 != 0) {
+        std::cerr << "l deve essere un numero divisibile per 2." << std::endl;
+        exit(1);
     }
 
     // variabile di conversione a string di l
@@ -155,17 +170,8 @@ int main(int argc, char* argv[]) {
 
         if(accur) {  // modalità di stampa dell'accuratezza
 
-            std::string l_value;
-
-            // l_value è pari a 2 se l'algoritmo sta usando il doppio delle righe per la matrice sketch, altrimenti è 1
-
-            if(!l_size)
-                l_value = "2";
-            else
-                l_value = "1";
-
             // viene eseguito uno script python che calcola l'accuratezza e la stampa in output
-            std::string command = "python3 accuracy_calc.py " + lString + " 0 "+ svd_value + " "  + nomeFileCSV + " " + l_value + " 2";
+            std::string command = "python3 accuracy_calc.py " + lString + " 0 "+ svd_value + " "  + nomeFileCSV + " 0 2";
             system(command.c_str());
 
             // Registra il tempo di fine dell'esecuzione completa del programma
@@ -186,10 +192,8 @@ int main(int argc, char* argv[]) {
 
         DynamicMatrix<double> matriceRidotta;
 
-        // in base alla modalità di esecuzione (2l o l), viene definito il percorso in cui verrà salvata la matrice sketch
-        if(!l_size)
-            filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV; //2l
-        else filePath = "./results/"+svd_value+"/sketch_1_l" + lString + "_" + nomeFileCSV; //l
+        // viene definito il percorso in cui verrà salvata la matrice sketch
+        filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV;
 
         // Verifica e crea le directory se non esistono
         if (!std::filesystem::exists(filePath.parent_path())) {
@@ -198,10 +202,8 @@ int main(int argc, char* argv[]) {
 
         auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-        // chiamata alla funzione frequent directions con 2l o l per il numero di righe della matrice sketch
-        if(!l_size)
-            matriceRidotta = frequent_directions::frequentDirections(2 * l, nomeFileCSV, svd, l_size);
-        else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
+        // chiamata alla funzione frequent directions
+        matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd);
 
         // Registra il tempo di fine dell'esecuzione di frequent directions
         auto end_timeFd = std::chrono::high_resolution_clock::now();
@@ -211,6 +213,9 @@ int main(int argc, char* argv[]) {
 
         // scrittura della matrice sketch su un file csv alla directory definita da filePath
         opencsv::scriviMatriceSuCSV(matriceRidotta, filePath);
+
+        // ottieni l'utilizzo di memoria
+        memoryUtil = get_mem_usage()-baseline;
 
         auto end_time = std::chrono::high_resolution_clock::now();
 
@@ -222,7 +227,11 @@ int main(int argc, char* argv[]) {
         // Stampa il tempo di esecuzione totale
         std::cout << "Tempo totale di esecuzione: " << duration.count() << " millisecondi" << std::endl;
 
+        // Stampa l'utilizzo della memoria
+        std::cout << "Utilizzo di memoria: " << memoryUtil << " KB" << std::endl;
+
     } else {   // modalità calcolo di accuratezza
+
 
         DynamicMatrix<double> matriceRidotta;
 
@@ -230,16 +239,18 @@ int main(int argc, char* argv[]) {
 
             // std::vector per salvare i tempi di esecuzione dell'algoritmo
             std::vector<int> timesFd;
+            std::vector<long> memoryUtils;
 
-            for (int i = 0; i < 5; i++) {
+            timesFd.reserve(10);
+            memoryUtils.reserve(10);
+
+            for (int i = 0; i < 10; i++) {
 
                 // Registra il tempo di inizio dell'esecuzione di frequent directions
                 auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-                // chiamata alla funzione frequent directions con 2l o l per il numero di righe della matrice sketch
-                if(!l_size)
-                    matriceRidotta = frequent_directions::frequentDirections(2*l, nomeFileCSV, svd, l_size);
-                else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
+                // chiamata alla funzione frequent directions
+                matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd);
 
                 // Registra il tempo di fine dell'esecuzione di frequent directions
                 auto end_timeFd = std::chrono::high_resolution_clock::now();
@@ -247,26 +258,32 @@ int main(int argc, char* argv[]) {
                 // Calcola la durata in millisecondi
                 timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
 
+                memoryUtil = get_mem_usage()-baseline;
+
                 // salvataggio del tempo di esecuzione in timesFd
                 timesFd.push_back(timeFd);
 
+                memoryUtils.push_back(memoryUtil);
+
             }
 
-            int sum = 0;
-            for(const auto& element : timesFd)
-                sum += element;
+            int sum = std::accumulate(timesFd.begin(), timesFd.end(), 0);
 
             // salvataggio della media dei valori di timesFd in timeFd
             timeFd = timesFd.empty() ? 0 : sum / timesFd.size();
+
+            long memSum = std::accumulate(memoryUtils.begin(), memoryUtils.end(), 0L);
+
+            memoryUtil = memoryUtils.empty() ? 0 : memSum / memoryUtils.size();
+
+
 
         } else {
 
             auto start_timeFd = std::chrono::high_resolution_clock::now();
 
-            // chiamata alla funzione frequent directions con 2l o l per il numero di righe della matrice sketch
-            if(!l_size)
-                matriceRidotta = frequent_directions::frequentDirections(2*l, nomeFileCSV, svd, l_size);
-            else matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd, l_size);
+            // chiamata alla funzione frequent directions
+            matriceRidotta = frequent_directions::frequentDirections(l, nomeFileCSV, svd);
 
             // Registra il tempo di fine dell'esecuzione di frequent directions
             auto end_timeFd = std::chrono::high_resolution_clock::now();
@@ -274,15 +291,15 @@ int main(int argc, char* argv[]) {
             // Calcola la durata in millisecondi
             timeFd = std::chrono::duration_cast<std::chrono::milliseconds>(end_timeFd - start_timeFd).count();
 
+            memoryUtil = get_mem_usage()-baseline;
+
         }
 
         // variabile path per l'eventuale creazione della directory dei risultati
         std::filesystem::path filePath;
 
-        // in base alla modalità di esecuzione (2l o l), viene definito il percorso in cui verrà salvata la matrice sketch
-        if(!l_size)
-            filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV;
-        else filePath = "./results/"+svd_value+"/sketch_1_l" + lString + "_" + nomeFileCSV;
+        //viene definito il percorso in cui verrà salvata la matrice sketch
+        filePath = "./results/"+svd_value+"/sketch_l" + lString + "_" + nomeFileCSV;
 
         // Verifica e crea le directory se non esistono
         if (!std::filesystem::exists(filePath.parent_path())) {
@@ -292,19 +309,8 @@ int main(int argc, char* argv[]) {
         // scrittura della matrice sketch su un file csv alla directory definita da filePath
         opencsv::scriviMatriceSuCSV(matriceRidotta, filePath);
 
-        std::string l_value;
-
-        // l_value è pari a 2 se l'algoritmo sta usando il doppio delle righe per la matrice sketch, altrimenti è 1
-
-        // in base alla modalità di esecuzione (2l o l), viene definito il percorso in cui verrà salvata la matrice sketch
-        if(!l_size) {
-            filePath = "./results/"+svd_value+"/list/results_" + nomeFileCSV;
-            l_value = "2";
-        }
-        else {
-            filePath = "./results/"+svd_value+"/list/results_1_" + nomeFileCSV;
-            l_value = "1";
-        }
+        // viene definito il percorso in cui vengono salvati i risultati in base alla funzione svd usata
+        filePath = "./results/"+svd_value+"/list/results_" + nomeFileCSV;
 
         // Verifica e crea le directory se non esistono
         if (!std::filesystem::exists(filePath.parent_path())) {
@@ -315,9 +321,10 @@ int main(int argc, char* argv[]) {
             - accuratezza, che viene calcolata all'interno dell'algoritmo;
             - bound
             - tempo di esecuzione
+            - utilizzo di memoria
          */
 
-        std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " " + svd_value + " " + nomeFileCSV + " " + l_value + " 1";
+        std::string command = "python3 accuracy_calc.py " + lString + " " + std::to_string(timeFd) + " " + svd_value + " " + nomeFileCSV + " " +std::to_string(memoryUtil) + " 1";
 
         system(command.c_str());
 
@@ -331,6 +338,9 @@ int main(int argc, char* argv[]) {
 
         // Stampa il tempo di esecuzione
         std::cout << "Tempo totale di esecuzione: " << duration.count() << " millisecondi" << std::endl;
+
+        // Stampa l'utilizzo di memoria
+        std::cout << "Utilizzo di memoria: " << memoryUtil << " KB" << std::endl;
 
 
     }

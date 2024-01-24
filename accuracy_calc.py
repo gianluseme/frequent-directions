@@ -3,76 +3,63 @@ import pandas as pd
 import numpy as np
 import os
 
-# 6 argomenti (nome dello script, valore di l, tempo di esecuzione dell'algoritmo, funzione svd,
-# nome del file, dimensione di l (normale o doppia), modalità di funzionamento dello script)
-if len(sys.argv) < 6:
-    print("Usage: python script.py <l_value> <timeFd_value> <svd> <fileName> <lsize> <accmode>")
+# Assicurati di avere almeno 7 argomenti (nome dello script + valore di l + tempo di esecuzione + modalità svd + nome del file + utilizzo di memoria + modalità script)
+if len(sys.argv) < 7:
+    print("Usage: python script.py <l_value> <timeFd_value> <svd> <fileName> <memoryUsage> <accmode>")
     sys.exit(1)
 
 # Ottieni il valore di l dalla riga di comando
-l_value = int(sys.argv[1])          # Valore di 'l'
+l_value = int(sys.argv[1])
 
-timeFd_value = float(sys.argv[2])   # Tempo impiegato dall'algoritmo frequent directions
+timeFd_value = float(sys.argv[2])
 
-svd = str(sys.argv[3])              # Funzione per SVD utilizzata
+svd = str(sys.argv[3])
 
-nomeFileCSV = str(sys.argv[4])      # Nome del file CSV
+nomeFileCSV = str(sys.argv[4])
 
-lsize = str(sys.argv[5])            # Dimensione di 'l' (1 o 2x)
+memoryUsage = int(sys.argv[5])
 
-accmode = str(sys.argv[6])          # Modalità di output (1 per scrivere su file, 2 per stampare su terminale)
+accmode = str(sys.argv[6])
 
+if accmode == '1': # modalità scrittura su file
 
-# costruzione del percorso del file risultante in base a 'lsize' e 'svd'
-if lsize == '2':
     filePath = './results/'+svd+'/list/results_' + nomeFileCSV
-if lsize == '1':
-    filePath = './results/'+svd+'/list/results_1_' + nomeFileCSV
 
-# lettura del file csv originale
-df = pd.read_csv(nomeFileCSV, header=None)
-A = df.values
+    df = pd.read_csv(nomeFileCSV, header=None)
+    A = df.values
 
-# Verifica se il file esiste o è vuoto
-if os.path.exists(filePath) and os.stat(filePath).st_size > 0:
-    # Leggi il file CSV esistente
-    df_result = pd.read_csv(filePath)
-else:
-    # Crea un DataFrame vuoto con le colonne etichettate
-    df_result = pd.DataFrame(columns=['l', 'timeFd', 'bound', 'accuracy'])
+    # Verifica se il file esiste o è vuoto
+    if os.path.exists(filePath) and os.stat(filePath).st_size > 0:
+        # Leggi il file CSV esistente
+        df_result = pd.read_csv(filePath)
+    else:
+        # Crea un DataFrame vuoto con le colonne etichettate
+        df_result = pd.DataFrame(columns=['l', 'timeFd', 'bound', 'accuracy', 'memoryUsage'])
 
-# percorso della matrice di sketch selezionata in base al numero di righe l, dalla funzione SVD utilizzata
-# e dalla modalità di funzionamento (l o 2xl righe)
-if lsize == '2':
+    # Calcola la norma di Frobenius
+    norm_frobenius = np.linalg.norm(A, ord='fro')
+
     file_path = './results/'+svd+'/sketch_l'+ str(l_value) + "_" + nomeFileCSV
-if lsize == '1':
-    file_path = './results/'+svd+'/sketch_1_l'+ str(l_value) + "_" + nomeFileCSV
 
-# lettura della matrice sketch
-df1 = pd.read_csv(file_path, header=None)
-B = df1.values
+    df1 = pd.read_csv(file_path, header=None)
+    B = df1.values
 
-# calcolo l'accuratezza
-diff = A.T @ A - B.T @ B
-accuracy = np.linalg.norm(diff, ord=2)
-
-# modalità scrittura su file
-if accmode == '1':
-
-    # norma di Frobenius della matrice originale
+    # Calcola la norma di Frobenius
     norm_frobenius_A = np.linalg.norm(A, ord='fro')
+
+    # Calcola l'accuracy
+    diff = A.T @ A - B.T @ B
+    accuracy = np.linalg.norm(diff, ord=2)
 
     # Cerca una riga con lo stesso valore di 'l'
     existing_row = df_result[df_result['l'] == l_value]
 
     if not existing_row.empty:
         # Se trovi una riga con lo stesso valore di 'l', sostituisci i dati
-        # il limite teorico sull'accuratezza dato dall'algoritmo è calcolato come 2 * (norm_frobenius_A ** 2) / l_value
-        df_result.loc[existing_row.index, ['timeFd', 'bound', 'accuracy']] = [timeFd_value, 2 * (norm_frobenius_A ** 2) / l_value, accuracy]
+        df_result.loc[existing_row.index, ['timeFd', 'bound', 'accuracy', 'memoryUsage']] = [timeFd_value, 2 * (norm_frobenius_A ** 2) / l_value, accuracy, memoryUsage]
     else:
         # Aggiungi le nuove informazioni al DataFrame
-        # il limite teorico sull'accuratezza dato dall'algoritmo è calcolato come 2 * (norm_frobenius_A ** 2) / l_value
-        new_row = pd.DataFrame({'l': [l_value], 'timeFd': [timeFd_value], 'bound': [2 * (norm_frobenius_A ** 2) / l_value], 'accuracy': [accuracy]})
+        new_row = pd.DataFrame({'l': [l_value], 'timeFd': [timeFd_value], 'bound': [2 * (norm_frobenius_A ** 2) / l_value], 'accuracy': [accuracy], 'memoryUsage': [memoryUsage]})
         df_result = pd.concat([df_result, new_row], ignore_index=True)
 
     # Ordina il DataFrame in base alla colonna 'l'
@@ -85,6 +72,22 @@ if accmode == '1':
     # Salva il DataFrame come file CSV
     df_result.to_csv(filePath, index=False, header=True)
 
+    print('Accuracy: ', accuracy)
 
-# stampa su terminale il risultato dell'accuratezza ottenuto
-print('Accuracy: ', accuracy)
+else:
+    if accmode == '2': # modalità stampa su terminale
+
+        df = pd.read_csv(nomeFileCSV, header=None)
+        A = df.values
+
+        file_path = './results/'+svd+'/sketch_l'+ str(l_value) + "_" + nomeFileCSV
+
+        df1 = pd.read_csv(file_path, header=None)
+        B = df1.values
+
+        # Calcola l'accuracy
+        diff = A.T @ A - B.T @ B
+        accuracy = np.linalg.norm(diff, ord=2)
+
+        print('Accuracy: ', accuracy)
+
