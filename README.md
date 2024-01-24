@@ -34,9 +34,11 @@ Run `./frequent_directions -i <input-file-name.csv> -l <rows number of the sketc
 It is possible to test the program by running `test.py [[file1.csv] [file2.csv] [file3.csv]]`.<br />
 This Python script can take up to three arguments representing the names of the input files. The script runs the FD algorithm iteratively on each matrix, on a list of l values (generated according to their number of columns) with the `--mode acc` and `--bench` flags, using the two LAPACK functions 'dgesvd' and 'dgesdd' to compute the SVD. Finally, the script plots the generated results.
 
+The same can be achieved by executing the bash script `benchmark.sh [[file1.csv] [file2.csv] [file3.csv]]`
+
 ## Example
 
-The program can be tested on `smallMatrix.csv`, a 10000x100 double precision matrix included in this repository, using `python3 smallMatrix.csv`.
+The program can be tested on `smallMatrix.csv`, a 10000x100 double precision matrix included in this repository, using `python3 smallMatrix.csv` or `./benchmark.sh smallMatrix.csv`.
 
 The following plots are generated:<br />
 
