@@ -17,7 +17,7 @@ It is also possible to explicitly require the 'dgesdd' function: <br />
 `./frequent_directions -i <input-file-name.csv> -l <rows number of the sketch matrix> --svd gesdd` <br />
 
 Run `./frequent_directions -i <input-file-name.csv> -l <rows number of the sketch matrix> --svd <svd function> --mode acc` to save to a csv file (after performing the matrix sketching):
-* Rarameter l (number of rows for the sketch matrix)
+* Parameter l (number of rows for the sketch matrix)
 * Running time
 * Theoretical upper bound for the sketch's accuracy
 * Actual accuracy
