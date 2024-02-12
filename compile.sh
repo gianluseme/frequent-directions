@@ -13,7 +13,7 @@ make
 
 # Copia dei file nella directory build
 cp ../accuracy_calc.py .
-cp ../test.py .
+cp ../benchmark.sh .
 cp ../smallMatrix.csv .
 cp ../plot.py .
 

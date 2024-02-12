@@ -108,7 +108,7 @@ public:
             }
 
             // aumenta di 1 l'indice della riga nulla successiva
-            nullRowIndex += 1;
+            ++nullRowIndex;
 
         }
 
@@ -157,6 +157,7 @@ public:
             quest'operazione è equivalente a calcolare B = diagS*V (con diagS avente numero di righe pari a quello di B),
             ma è più efficiente, in quanto coinvolge nel prodotto una matrice diagonale
          */
+
         submatrix(B, 0UL, 0UL, l / 2, B.columns()) = submatrix(diagS*V, 0UL, 0UL, l / 2, (diagS*V).columns());
         submatrix(B, l / 2, 0UL, B.rows() - l / 2, B.columns()) = 0.0;
 

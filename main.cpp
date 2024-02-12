@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 
     // Argomenti: file di input, l (numero di righe della matrice ridotta),
     // parametro per scegliere tra la funzione gesvd e gesdd (default gesdd), modalità di funzionamento (solo riduzione/calcolo accuratezza, default solo riduzione)
-    // parametro l_truesize per scegliere se usare il numero di righe l oppure se lavorare con 2l, acctest per effettuare test di accuratezza, bound per calcolare il bound teorico
+    // parametro acctest per effettuare test di accuratezza, bound per calcolare il bound teorico
 
     // Registra il tempo di inizio dell'esecuzione del programma
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
             ("i,input", "File di input (.csv)", cxxopts::value<std::string>())
             ("l", "N. righe della matrice ridotta", cxxopts::value<int>())
             ("svd", "Scelta tra funzioni gesvd e gesdd per il calcolo SVD nell'algoritmo", cxxopts::value<std::string>()->default_value("gesdd"))
-            ("mode", "Modalità (solo riduzione/accuracy test)", cxxopts::value<std::string>()->default_value("ronly"))
+            ("mode", "Modalità (solo riduzione/accuracy test + salvataggio dei risultati di esecuzione)", cxxopts::value<std::string>()->default_value("ronly"))
             ("bench", "Abilita la modalità di benchmark (esegue più volte l'algoritmo)")
             ("bound", "Calcola il bound dell'algoritmo (dato l)")
             ("acctest", "Esegui il test di accuratezza (dato l)");
